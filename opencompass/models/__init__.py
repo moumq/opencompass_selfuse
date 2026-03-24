@@ -24,6 +24,7 @@ from .hunyuan_api import Hunyuan  # noqa: F401
 from .intern_model import InternLM  # noqa: F401
 from .interntrain import InternTrain  # noqa: F401
 from .krgpt_api import KrGPT  # noqa: F401
+from .keye_api import KeyeChat  # noqa: F401
 from .lightllm_api import LightllmAPI, LightllmChatAPI  # noqa: F401
 from .llama2 import Llama2, Llama2Chat  # noqa: F401
 from .minimax_api import MiniMax, MiniMaxChatCompletionV2  # noqa: F401
