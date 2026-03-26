@@ -277,6 +277,13 @@ class TestOpenICLInferConcurrentTask(unittest.TestCase):
         task._set_default_value(cfg, 'key', 'new')
         self.assertEqual(cfg['key'], 'existing')
 
+    def test_set_default_value_skips_none(self):
+        """Test _set_default_value preserves inferencer defaults."""
+        task = OpenICLInferConcurrentTask(self.cfg)
+        cfg = ConfigDict({})
+        task._set_default_value(cfg, 'batch_size', None)
+        self.assertNotIn('batch_size', cfg)
+
     @patch('opencompass.tasks.openicl_infer_concurrent.ICL_INFERENCERS')
     def test_build_inferencer_gen(self, mock_registry):
         """Test _build_inferencer with GenInferencer."""

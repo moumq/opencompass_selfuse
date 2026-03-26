@@ -219,9 +219,13 @@ class APITemplateParser:
         Returns:
             List[PromptType]: The finalized prompt or a conversation.
         """
+        if isinstance(prompt_template, dict):
+            prompt_template = PromptList([prompt_template])
+
         assert isinstance(prompt_template, (str, list, PromptList, tuple))
 
-        if isinstance(prompt_template, list) and len(prompt_template) > 0:
+        if isinstance(prompt_template, (list, tuple)) and len(
+                prompt_template) > 0:
             if all('role' in single_item and 'content' in single_item
                    for single_item in prompt_template):
                 prompt_template = copy.deepcopy(prompt_template)
@@ -242,6 +246,10 @@ class APITemplateParser:
                         prompt_template,
                         key=lambda x: CHATML_ROLE.index(x['role']))
                 return prompt_template
+            if not isinstance(prompt_template, PromptList) and all(
+                    isinstance(single_item, (str, dict))
+                    for single_item in prompt_template):
+                prompt_template = PromptList(list(prompt_template))
 
         if not isinstance(prompt_template, (str, PromptList)):
             return [self.parse_template(p, mode=mode) for p in prompt_template]

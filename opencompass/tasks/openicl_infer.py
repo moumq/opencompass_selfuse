@@ -158,7 +158,7 @@ class OpenICLInferTask(BaseTask):
                                  output_json_filename=out_file)
 
     def _set_default_value(self, cfg: ConfigDict, key: str, value: Any):
-        if key not in cfg:
+        if key not in cfg and value is not None:
             cfg[key] = value
 
 

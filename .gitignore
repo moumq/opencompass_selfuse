@@ -126,6 +126,8 @@ turbomind/
 *.txt
 *.jpg
 *.json
+!examples/eval_flexible.sample.json
+!opencompass/configs/flexible_eval/*.json
 *.jsonl
 *.csv
 *.npy

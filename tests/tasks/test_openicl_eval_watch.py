@@ -9,6 +9,7 @@ from unittest.mock import MagicMock, patch
 from mmengine.config import ConfigDict
 
 from opencompass.tasks.openicl_eval_watch import OpenICLEvalWatchTask
+from opencompass.utils import dataset_abbr_from_cfg
 
 
 class TestOpenICLEvalWatchTask(unittest.TestCase):
@@ -255,6 +256,72 @@ class TestOpenICLEvalWatchTask(unittest.TestCase):
 
         # Should call _score for ready tasks
         task._score.assert_called()
+
+    @patch('opencompass.tasks.openicl_eval_watch.get_infer_output_path')
+    @patch('opencompass.tasks.openicl_eval_watch.InferStatusManager')
+    @patch('opencompass.tasks.openicl_eval_watch.time.sleep')
+    def test_run_continues_after_eval_failure(self, mock_sleep,
+                                              mock_status_manager,
+                                              mock_get_path):
+        """Test run continues when one dataset eval fails."""
+        mock_get_path.return_value = osp.join(self.temp_dir, 'result.json')
+
+        cfg = ConfigDict({
+            'work_dir':
+            self.temp_dir,
+            'models': [ConfigDict({'abbr': 'test_model'})],
+            'datasets': [[
+                ConfigDict({
+                    'abbr': 'dataset_a',
+                    'reader_cfg': {
+                        'output_column': 'answer'
+                    },
+                    'eval_cfg': {}
+                }),
+                ConfigDict({
+                    'abbr': 'dataset_b',
+                    'reader_cfg': {
+                        'output_column': 'answer'
+                    },
+                    'eval_cfg': {}
+                })
+            ]],
+            'eval': {
+                'runner': {
+                    'task': {
+                        'watch_interval': 1.0,
+                        'heartbeat_timeout': 30.0,
+                        'log_interval': 10.0
+                    }
+                }
+            }
+        })
+
+        mock_status = MagicMock()
+        mock_status.get_task_status.return_value = {
+            'task1': {
+                'status': 'done'
+            }
+        }
+        mock_status_manager.return_value = mock_status
+
+        task = OpenICLEvalWatchTask(cfg)
+        task.logger = MagicMock()
+        task._is_ready = MagicMock(return_value=True)
+
+        score_calls = []
+
+        def score_side_effect():
+            score_calls.append(dataset_abbr_from_cfg(task.dataset_cfg))
+            if dataset_abbr_from_cfg(task.dataset_cfg) == 'dataset_a':
+                raise RuntimeError('boom')
+
+        task._score = MagicMock(side_effect=score_side_effect)
+
+        task.run()
+
+        self.assertEqual(score_calls, ['dataset_a', 'dataset_b'])
+        task.logger.exception.assert_called_once()
 
     @patch('opencompass.tasks.openicl_eval_watch.get_infer_output_path')
     @patch('opencompass.tasks.openicl_eval_watch.InferStatusManager')

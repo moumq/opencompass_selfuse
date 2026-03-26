@@ -73,6 +73,7 @@ class OpenICLEvalWatchTask(OpenICLEvalTask):
 
             if ready:
                 for model_cfg, dataset_cfg in ready:
+                    model_abbr = model_abbr_from_cfg(model_cfg)
                     dataset_abbr = dataset_abbr_from_cfg(dataset_cfg)
                     self.logger.info(f'Start eval {dataset_abbr}')
                     self.model_cfg = model_cfg
@@ -80,7 +81,12 @@ class OpenICLEvalWatchTask(OpenICLEvalTask):
                     self.eval_cfg = copy.deepcopy(dataset_cfg.get('eval_cfg'))
                     self.output_column = copy.deepcopy(
                         dataset_cfg['reader_cfg']['output_column'])
-                    self._score()
+                    try:
+                        self._score()
+                    except Exception:
+                        self.logger.exception(
+                            'Eval failed for %s/%s, continuing with '
+                            'remaining datasets.', model_abbr, dataset_abbr)
                 pending = [item for item in pending if item not in ready]
                 continue
 

@@ -171,9 +171,36 @@ FLEX_EVAL_CONFIG=/path/to/eval_job.json python run.py examples/eval_flexible.py
 说明：
 
 - 该方式不需要改 OpenCompass 主流程。
-- 旧的 Keye 专用 schema（顶层 `model`/`data` map）已不再支持，请改用顶层 `models`/`datasets` 列表。
-- 内联模型中若设置 `class: "keyeAPI"`，会自动映射到 `KeyeChat`。你也可以直接写 `class: "KeyeChat"`。
+- 当前同时支持两种 schema：
+  - 推荐使用顶层 `models`/`datasets` 列表。
+  - 兼容历史上常用的 Keye 风格顶层 `model`/`data` map，便于本地 API 服务一键评测。
+- 内联模型中若设置 `class: "keyeAPI"` 或 `class: "KeyeFastAPI"`，会自动映射到 `KeyeChat`。你也可以直接写 `class: "KeyeChat"`。
 - 内联模型支持 `name` 字段；若未显式设置 `abbr`，会使用 `name` 作为输出目录名（`predictions/<name>/<dataset>.json`）。
+- 对于 `KeyeChat` 这类本地 API 模型，如果未显式提供 `ckpt/path`，会默认使用模型条目的名字作为 `ckpt`；因此随机 step 名也可以直接写在配置 key 里。
+
+兼容 schema 示例：
+
+```json
+{
+  "model": {
+    "istep0000200_2nd_autothink": {
+      "class": "KeyeFastAPI",
+      "max_tokens": 2048,
+      "temperature": 0,
+      "img_detail": "high",
+      "retry": 20,
+      "timeout": 180,
+      "verbose": true,
+      "api_base": "http://127.0.0.1:15553/v1"
+    }
+  },
+  "data": {
+    "aime2025": {
+      "dataset": "aime2025_gen"
+    }
+  }
+}
+```
 
 可复用清单导出工具（完整模型/数据集引用）：
 

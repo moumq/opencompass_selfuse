@@ -1,0 +1,1779 @@
+{
+  "ARC_Prize_Public_Evaluation": [
+    "arc_agi_2_public_evaluation_gen",
+    "arc_prize_public_evaluation_gen",
+    "arc_prize_public_evaluation_gen_872059",
+    "arc_prize_public_evaluation_gen_fedd04"
+  ],
+  "ARC_c": [
+    "ARC_c_clean_ppl",
+    "ARC_c_cot_gen_926652",
+    "ARC_c_few_shot_gen_e9b043",
+    "ARC_c_few_shot_ppl",
+    "ARC_c_gen",
+    "ARC_c_gen_1e0de5",
+    "ARC_c_ppl",
+    "ARC_c_ppl_2ef631",
+    "ARC_c_ppl_a450bd",
+    "ARC_c_ppl_d52a21"
+  ],
+  "ARC_e": [
+    "ARC_e_gen",
+    "ARC_e_gen_1e0de5",
+    "ARC_e_ppl",
+    "ARC_e_ppl_2ef631",
+    "ARC_e_ppl_a450bd",
+    "ARC_e_ppl_d52a21"
+  ],
+  "BeyondAIME": [
+    "beyondaime_cascade_eval_gen_5e9f4f",
+    "beyondaime_gen"
+  ],
+  "CARDBiomedBench": [
+    "CARDBiomedBench_llmjudge_gen_99a231",
+    "CARDBiomedBench_llmjudge_rawprompt_gen_b4d90c"
+  ],
+  "CHARM": [
+    "charm_memory_gen_bbbd53",
+    "charm_reason_cot_only_gen_f7b7d3",
+    "charm_reason_gen",
+    "charm_reason_gen_f8fca2",
+    "charm_reason_ppl_3da4de"
+  ],
+  "CIBench": [
+    "CIBench_generation_gen_8ab0dc",
+    "CIBench_generation_oracle_gen_c4a7c1",
+    "CIBench_template_gen_e6b12a",
+    "CIBench_template_oracle_gen_fecda1"
+  ],
+  "CLUE_C3": [
+    "CLUE_C3_gen",
+    "CLUE_C3_gen_8c358f",
+    "CLUE_C3_ppl",
+    "CLUE_C3_ppl_56b537",
+    "CLUE_C3_ppl_e24a31"
+  ],
+  "CLUE_CMRC": [
+    "CLUE_CMRC_gen",
+    "CLUE_CMRC_gen_1bd3c8",
+    "CLUE_CMRC_gen_3749cd",
+    "CLUE_CMRC_gen_8484b9",
+    "CLUE_CMRC_gen_941108"
+  ],
+  "CLUE_DRCD": [
+    "CLUE_DRCD_gen",
+    "CLUE_DRCD_gen_1bd3c8",
+    "CLUE_DRCD_gen_3749cd",
+    "CLUE_DRCD_gen_8484b9",
+    "CLUE_DRCD_gen_941108"
+  ],
+  "CLUE_afqmc": [
+    "CLUE_afqmc_gen",
+    "CLUE_afqmc_gen_901306",
+    "CLUE_afqmc_ppl",
+    "CLUE_afqmc_ppl_378c5b",
+    "CLUE_afqmc_ppl_6507d7",
+    "CLUE_afqmc_ppl_7b0c1e"
+  ],
+  "CLUE_cmnli": [
+    "CLUE_cmnli_gen",
+    "CLUE_cmnli_gen_1abf97",
+    "CLUE_cmnli_gen_51e956",
+    "CLUE_cmnli_ppl",
+    "CLUE_cmnli_ppl_98dd6e",
+    "CLUE_cmnli_ppl_ef69e7",
+    "CLUE_cmnli_ppl_fdc6de"
+  ],
+  "CLUE_ocnli": [
+    "CLUE_ocnli_gen",
+    "CLUE_ocnli_gen_51e956",
+    "CLUE_ocnli_gen_c4cb6c",
+    "CLUE_ocnli_ppl",
+    "CLUE_ocnli_ppl_98dd6e",
+    "CLUE_ocnli_ppl_ef69e7",
+    "CLUE_ocnli_ppl_fdc6de"
+  ],
+  "CMPhysBench": [
+    "cmphysbench_gen",
+    "cmphysbench_rawprompt_gen"
+  ],
+  "ChemBench": [
+    "ChemBench_gen",
+    "ChemBench_gen_a9f753",
+    "ChemBench_llmjudge_gen",
+    "ChemBench_llmjudge_gen_c584cf",
+    "ChemBench_llmjudge_rawprompt_gen_fa3fc4"
+  ],
+  "ClimaQA": [
+    "ClimaQA_Gold_llm_judge_gen",
+    "ClimaQA_Gold_llm_judge_gen_f15343",
+    "ClimaQA_Gold_llm_judge_rawprompt_gen_b3080f",
+    "ClimaQA_Silver_llm_judge_gen",
+    "ClimaQA_Silver_llm_judge_gen_f15343"
+  ],
+  "ClinicBench": [
+    "ClinicBench_llmjudge_gen",
+    "ClinicBench_llmjudge_gen_d09668"
+  ],
+  "Earth_Silver": [
+    "Earth_Silver_gen",
+    "Earth_Silver_llmjudge_gen",
+    "Earth_Silver_llmjudge_gen_46140c",
+    "Earth_Silver_llmjudge_rawprompt_gen_a84bc6"
+  ],
+  "FewCLUE_bustm": [
+    "FewCLUE_bustm_gen",
+    "FewCLUE_bustm_gen_634f41",
+    "FewCLUE_bustm_ppl",
+    "FewCLUE_bustm_ppl_4b16c0",
+    "FewCLUE_bustm_ppl_9ef540",
+    "FewCLUE_bustm_ppl_e53034"
+  ],
+  "FewCLUE_chid": [
+    "FewCLUE_chid_gen",
+    "FewCLUE_chid_gen_0a29a2",
+    "FewCLUE_chid_ppl",
+    "FewCLUE_chid_ppl_8f2872",
+    "FewCLUE_chid_ppl_acccb5"
+  ],
+  "FewCLUE_cluewsc": [
+    "FewCLUE_cluewsc_gen",
+    "FewCLUE_cluewsc_gen_c68933",
+    "FewCLUE_cluewsc_ppl",
+    "FewCLUE_cluewsc_ppl_12e4e0",
+    "FewCLUE_cluewsc_ppl_4284a0",
+    "FewCLUE_cluewsc_ppl_868415"
+  ],
+  "FewCLUE_csl": [
+    "FewCLUE_csl_gen",
+    "FewCLUE_csl_gen_28b223",
+    "FewCLUE_csl_gen_87f4a8",
+    "FewCLUE_csl_ppl",
+    "FewCLUE_csl_ppl_769f8d",
+    "FewCLUE_csl_ppl_841b62"
+  ],
+  "FewCLUE_eprstmt": [
+    "FewCLUE_eprstmt_gen",
+    "FewCLUE_eprstmt_gen_740ea0",
+    "FewCLUE_eprstmt_ppl",
+    "FewCLUE_eprstmt_ppl_1ce587",
+    "FewCLUE_eprstmt_ppl_f1e631"
+  ],
+  "FewCLUE_ocnli_fc": [
+    "FewCLUE_ocnli_fc_gen",
+    "FewCLUE_ocnli_fc_gen_f97a97",
+    "FewCLUE_ocnli_fc_ppl",
+    "FewCLUE_ocnli_fc_ppl_9e8b3d",
+    "FewCLUE_ocnli_fc_ppl_c08300"
+  ],
+  "FewCLUE_tnews": [
+    "FewCLUE_tnews_gen",
+    "FewCLUE_tnews_gen_b90e4a",
+    "FewCLUE_tnews_ppl",
+    "FewCLUE_tnews_ppl_7d1c07",
+    "FewCLUE_tnews_ppl_d10e8a",
+    "FewCLUE_tnews_ppl_fff486"
+  ],
+  "FinanceIQ": [
+    "FinanceIQ_gen",
+    "FinanceIQ_gen_e0e6b5",
+    "FinanceIQ_ppl",
+    "FinanceIQ_ppl_42b9bd"
+  ],
+  "GLUE_CoLA": [
+    "GLUE_CoLA_ppl",
+    "GLUE_CoLA_ppl_77d0df"
+  ],
+  "GLUE_MRPC": [
+    "GLUE_MRPC_ppl",
+    "GLUE_MRPC_ppl_96564c"
+  ],
+  "GLUE_QQP": [
+    "GLUE_QQP_ppl",
+    "GLUE_QQP_ppl_250d00"
+  ],
+  "GaokaoBench": [
+    "GaokaoBench_gen",
+    "GaokaoBench_gen_5cfe9e",
+    "GaokaoBench_mixed",
+    "GaokaoBench_mixed_9af5ee",
+    "GaokaoBench_no_subjective_gen_4c31db",
+    "GaokaoBench_no_subjective_gen_d16acb",
+    "GaokaoBench_no_subjective_gen_d21e37"
+  ],
+  "HLE": [
+    "hle_biomed_llm_verify_gen_6ff468",
+    "hle_gen",
+    "hle_llmverify_academic",
+    "hle_llmverify_gen_6ff468",
+    "hle_llmverify_rawprompt_gen_0970dd"
+  ],
+  "HealthBench": [
+    "healthbench_gen_831613"
+  ],
+  "IFBench": [
+    "IFBench_gen",
+    "IFBench_rawprompt_gen"
+  ],
+  "IFEval": [
+    "IFEval_gen",
+    "IFEval_gen_3321a3",
+    "IFEval_gen_353ae7",
+    "IFEval_rawprompt_gen_e7f781"
+  ],
+  "LCBench": [
+    "lcbench_gen",
+    "lcbench_gen_5ff288",
+    "lcbench_levels_gen_bb665f",
+    "lcbench_repeat10_gen",
+    "lcbench_repeat10_gen_5ff288"
+  ],
+  "MMLUArabic": [
+    "MMLUArabic_gen",
+    "MMLUArabic_gen_326684",
+    "MMLUArabic_ppl",
+    "MMLUArabic_ppl_d2333a",
+    "MMLUArabic_zero_shot_gen",
+    "MMLUArabic_zero_shot_gen_3523e0"
+  ],
+  "MathBench": [
+    "deprecated_mathbench_2024_gen_de9ff9",
+    "deprecated_mathbench_agent_gen_48ec47",
+    "deprecated_mathbench_agent_gen_fbe13b",
+    "deprecated_mathbench_arith_gen_ccd638",
+    "deprecated_mathbench_cot_gen_66f329",
+    "deprecated_mathbench_gen_7b734b",
+    "mathbench_2024_few_shot_mixed_4a3fd4",
+    "mathbench_2024_gen_19e486",
+    "mathbench_2024_gen_1dc21d",
+    "mathbench_2024_gen_4b8f28",
+    "mathbench_2024_gen_50a320",
+    "mathbench_2024_gen_fc2a24",
+    "mathbench_2024_wocircular_gen_1dc21d",
+    "mathbench_2024_wocircular_mixed_8eb12b",
+    "mathbench_gen"
+  ],
+  "MedBench": [
+    "medbench_gen",
+    "medbench_gen_0b4fff"
+  ],
+  "MedCalc_Bench": [
+    "MedCalcBench_official_gen_a5155f"
+  ],
+  "MedQA": [
+    "MedQA_gen_3bf756",
+    "MedQA_llmjudge_gen_3bf756"
+  ],
+  "MedXpertQA": [
+    "MedXpertQA_gen",
+    "MedXpertQA_llmjudge_gen",
+    "MedXpertQA_llmjudge_rawprompt_gen"
+  ],
+  "Medbullets": [
+    "medbullets_gen",
+    "medbullets_gen_60c8f5",
+    "medbullets_llmjudge_gen",
+    "medbullets_llmjudge_gen_60c8f5"
+  ],
+  "MolInstructions_chem": [
+    "mol_instructions_chem_gen",
+    "mol_instructions_chem_rawprompt_gen"
+  ],
+  "NPHardEval": [
+    "NPHardEval_gen",
+    "NPHardEval_gen_22aac5"
+  ],
+  "OlymMATH": [
+    "olymmath_cascade_eval_gen_97b203",
+    "olymmath_llm_judeg_gen",
+    "olymmath_llmverify_gen_97b203",
+    "olymmath_llmverify_rawprompt_gen_9d3a8e"
+  ],
+  "OlympiadBench": [
+    "OlympiadBenchMath_0shot_llmverify_gen_9c22f2",
+    "OlympiadBench_0shot_cascade_eval_gen_be8b13",
+    "OlympiadBench_0shot_gen_be8b13",
+    "OlympiadBench_0shot_llmverify_gen_be8b13",
+    "OlympiadBench_0shot_llmverify_rawprompt_gen_be8b13"
+  ],
+  "OpenFinData": [
+    "OpenFinData_gen",
+    "OpenFinData_gen_46dedb"
+  ],
+  "PHYBench": [
+    "phybench_gen",
+    "phybench_rawprompt_gen"
+  ],
+  "PHYSICS": [
+    "PHYSICS_llm_judge_gen",
+    "PHYSICS_llm_judge_gen_a133a2",
+    "PHYSICS_llm_judge_rawprompt_gen_56ebc8"
+  ],
+  "PI_LLM": [
+    "pi_llm_gen"
+  ],
+  "PJExam": [
+    "PJExam_gen",
+    "PJExam_gen_8cd97c"
+  ],
+  "PMMEval": [
+    "flores_gen",
+    "flores_gen_2697d7",
+    "humanevalxl_gen",
+    "humanevalxl_gen_bdec92",
+    "mgsm_gen",
+    "mgsm_gen_679720",
+    "mhellaswag_gen",
+    "mhellaswag_gen_1a6b73",
+    "mifeval_gen",
+    "mifeval_gen_79f8fb",
+    "mlogiqa_gen",
+    "mlogiqa_gen_36c4f9",
+    "mmmlu_gen",
+    "mmmlu_gen_d5017d",
+    "pmmeval_gen",
+    "xnli_gen",
+    "xnli_gen_973734"
+  ],
+  "ProcessBench": [
+    "processbench_gen"
+  ],
+  "ProteinLMBench": [
+    "ProteinLMBench_gen_a67965",
+    "ProteinLMBench_llmjudge_gen_a67965",
+    "ProteinLMBench_llmjudge_rawprompt_gen_9627a6"
+  ],
+  "PubMedQA": [
+    "PubMedQA_llmjudge_gen",
+    "PubMedQA_llmjudge_gen_f00302"
+  ],
+  "QuALITY": [
+    "QuALITY_gen",
+    "QuALITY_gen_c407cb"
+  ],
+  "R_Bench": [
+    "rbench_gen_544610",
+    "rbench_llmjudge_gen_c89350",
+    "rbench_llmjudge_rawprompt_gen_c24221"
+  ],
+  "SVAMP": [
+    "svamp_gen",
+    "svamp_gen_fb25e4"
+  ],
+  "SciEval": [
+    "SciEval_5shot_gen_4043d4",
+    "SciEval_5shot_llmjudge_gen_b7b684",
+    "SciEval_lifescience_sets"
+  ],
+  "SciKnowEval": [
+    "SciKnowEval_gen_ebe47d",
+    "SciKnowEval_llmjudge_gen_ebe47d"
+  ],
+  "SciReasoner": [
+    "GUE_gen",
+    "LLM4Mat_gen",
+    "UMG",
+    "UPG",
+    "bio_instruction_gen",
+    "bulk_modulus_material_gen",
+    "composition_material_gen",
+    "mol_biotext_gen",
+    "mol_molecule_gen",
+    "mol_protein_gen",
+    "opi_gen",
+    "peer_gen",
+    "retrosynthesis_USPTO_gen",
+    "scireasoner_gen",
+    "smol_gen",
+    "unconditional_RNA_gen",
+    "unconditional_material_gen"
+  ],
+  "ScienceQA": [
+    "ScienceQA_llmjudge_gen",
+    "ScienceQA_llmjudge_gen_f00302"
+  ],
+  "SeedBench": [
+    "seedbench_gen",
+    "seedbench_gen_5d5ea1"
+  ],
+  "SimpleQA": [
+    "simpleqa_gen",
+    "simpleqa_gen_0283c3"
+  ],
+  "SmolInstruct": [
+    "smolinstruct_0shot_instruct_gen",
+    "smolinstruct_0shot_instruct_rawprompt_gen",
+    "smolinstruct_fts_0shot_instruct",
+    "smolinstruct_fts_0shot_rawprompt_instruct",
+    "smolinstruct_fts_gen_5774b5",
+    "smolinstruct_gen",
+    "smolinstruct_meteor_0shot_instruct",
+    "smolinstruct_meteor_0shot_rawprompt_instruct",
+    "smolinstruct_meteor_gen_065150",
+    "smolinstruct_nc_0shot_instruct",
+    "smolinstruct_nc_0shot_rawprompt_instruct",
+    "smolinstruct_nc_gen_c84c18",
+    "smolinstruct_pp_acc_0_shot_instruct",
+    "smolinstruct_pp_acc_0_shot_rawprompt_instruct",
+    "smolinstruct_pp_acc_gen_8607a3",
+    "smolinstruct_rmse_0shot_instruct",
+    "smolinstruct_rmse_0shot_rawprompt_instruct",
+    "smolinstruct_rmse_gen_0fcc6b"
+  ],
+  "SuperGLUE_AX_b": [
+    "SuperGLUE_AX_b_gen",
+    "SuperGLUE_AX_b_gen_4dfefa",
+    "SuperGLUE_AX_b_ppl",
+    "SuperGLUE_AX_b_ppl_0748aa",
+    "SuperGLUE_AX_b_ppl_6db806"
+  ],
+  "SuperGLUE_AX_g": [
+    "SuperGLUE_AX_g_gen",
+    "SuperGLUE_AX_g_gen_68aac7",
+    "SuperGLUE_AX_g_ppl",
+    "SuperGLUE_AX_g_ppl_50f8f6",
+    "SuperGLUE_AX_g_ppl_66caf3"
+  ],
+  "SuperGLUE_BoolQ": [
+    "SuperGLUE_BoolQ_cot_gen_1d56df",
+    "SuperGLUE_BoolQ_few_shot_gen_ba58ea",
+    "SuperGLUE_BoolQ_few_shot_ppl",
+    "SuperGLUE_BoolQ_gen",
+    "SuperGLUE_BoolQ_gen_883d50",
+    "SuperGLUE_BoolQ_ppl",
+    "SuperGLUE_BoolQ_ppl_16b1d9",
+    "SuperGLUE_BoolQ_ppl_314797",
+    "SuperGLUE_BoolQ_ppl_314b96",
+    "SuperGLUE_BoolQ_ppl_4da4db",
+    "SuperGLUE_BoolQ_ppl_9619db"
+  ],
+  "SuperGLUE_CB": [
+    "SuperGLUE_CB_gen",
+    "SuperGLUE_CB_gen_854c6c",
+    "SuperGLUE_CB_ppl",
+    "SuperGLUE_CB_ppl_0143fe",
+    "SuperGLUE_CB_ppl_11c175"
+  ],
+  "SuperGLUE_COPA": [
+    "SuperGLUE_COPA_gen",
+    "SuperGLUE_COPA_gen_91ca53",
+    "SuperGLUE_COPA_ppl",
+    "SuperGLUE_COPA_ppl_54058d",
+    "SuperGLUE_COPA_ppl_5c24f1",
+    "SuperGLUE_COPA_ppl_9f3618"
+  ],
+  "SuperGLUE_MultiRC": [
+    "SuperGLUE_MultiRC_gen",
+    "SuperGLUE_MultiRC_gen_27071f",
+    "SuperGLUE_MultiRC_ppl",
+    "SuperGLUE_MultiRC_ppl_866273",
+    "SuperGLUE_MultiRC_ppl_ced824"
+  ],
+  "SuperGLUE_RTE": [
+    "SuperGLUE_RTE_gen",
+    "SuperGLUE_RTE_gen_68aac7",
+    "SuperGLUE_RTE_ppl",
+    "SuperGLUE_RTE_ppl_50f8f6",
+    "SuperGLUE_RTE_ppl_66caf3"
+  ],
+  "SuperGLUE_ReCoRD": [
+    "SuperGLUE_ReCoRD_gen",
+    "SuperGLUE_ReCoRD_gen_0f7784",
+    "SuperGLUE_ReCoRD_gen_30dea0",
+    "SuperGLUE_ReCoRD_gen_a69961"
+  ],
+  "SuperGLUE_WSC": [
+    "SuperGLUE_WSC_gen",
+    "SuperGLUE_WSC_gen_7902a7",
+    "SuperGLUE_WSC_gen_fe4bf3",
+    "SuperGLUE_WSC_ppl",
+    "SuperGLUE_WSC_ppl_003529",
+    "SuperGLUE_WSC_ppl_1c4a90",
+    "SuperGLUE_WSC_ppl_d0f531",
+    "SuperGLUE_WSC_ppl_f37e78"
+  ],
+  "SuperGLUE_WiC": [
+    "SuperGLUE_WiC_gen",
+    "SuperGLUE_WiC_gen_d06864",
+    "SuperGLUE_WiC_ppl",
+    "SuperGLUE_WiC_ppl_312de9",
+    "SuperGLUE_WiC_ppl_3fb6fd",
+    "SuperGLUE_WiC_ppl_c926be"
+  ],
+  "TabMWP": [
+    "TabMWP_gen",
+    "TabMWP_gen_2aef96"
+  ],
+  "TheoremQA": [
+    "TheoremQA_5shot_gen_6f0af8",
+    "TheoremQA_gen",
+    "ThroremQA_0shot_cot_gen_8acdf7",
+    "deprecated_TheoremQA_gen_424e0a",
+    "deprecated_TheoremQA_gen_7009de",
+    "deprecated_TheoremQA_gen_ef26ca",
+    "deprecated_TheoremQA_post_v2_gen_2c2583",
+    "deprecated_TheoremQA_post_v2_gen_ef26ca"
+  ],
+  "XCOPA": [
+    "XCOPA_ppl",
+    "XCOPA_ppl_54058d"
+  ],
+  "XLSum": [
+    "XLSum_gen",
+    "XLSum_gen_2bb71c"
+  ],
+  "Xsum": [
+    "Xsum_gen",
+    "Xsum_gen_31397e",
+    "Xsum_gen_8ea5f8"
+  ],
+  "adv_glue": [
+    "adv_glue_mnli_gen",
+    "adv_glue_mnli_gen_bd8ef0",
+    "adv_glue_mnli_mm_gen",
+    "adv_glue_mnli_mm_gen_bd8ef0",
+    "adv_glue_qnli_gen",
+    "adv_glue_qnli_gen_0b7326",
+    "adv_glue_qqp_gen",
+    "adv_glue_qqp_gen_cdc277",
+    "adv_glue_rte_gen",
+    "adv_glue_rte_gen_8cc547",
+    "adv_glue_sst2_gen",
+    "adv_glue_sst2_gen_ee8d3b"
+  ],
+  "agieval": [
+    "agieval_gen",
+    "agieval_gen_397d81",
+    "agieval_gen_617738",
+    "agieval_gen_64afd3",
+    "agieval_gen_a0c741",
+    "agieval_mixed",
+    "agieval_mixed_0fa998"
+  ],
+  "aime2024": [
+    "aime2024_0shot_nocot_gen_2b9dc2",
+    "aime2024_0shot_nocot_genericllmeval_academic_gen",
+    "aime2024_0shot_nocot_genericllmeval_gen_2b9dc2",
+    "aime2024_cascade_eval_gen_5e9f4f",
+    "aime2024_cascade_eval_rawprompt_gen_2f2c96",
+    "aime2024_gen",
+    "aime2024_gen_17d799",
+    "aime2024_gen_6e39a4",
+    "aime2024_llmjudge_gen",
+    "aime2024_llmjudge_gen_5e9f4f",
+    "aime2024_llmverify_repeat16_gen_bf7475",
+    "aime2024_llmverify_repeat8_gen_e8fcee"
+  ],
+  "aime2025": [
+    "aime2025_cascade_eval_gen_5e9f4f",
+    "aime2025_cascade_eval_rawprompt_gen_2f2c96",
+    "aime2025_gen",
+    "aime2025_llmjudge_academic",
+    "aime2025_llmjudge_gen_5e9f4f"
+  ],
+  "aime2026": [
+    "aime2026_cascade_eval_gen_6ff468",
+    "aime2026_cascade_eval_rawprompt_gen_0970dd",
+    "aime2026_gen"
+  ],
+  "anli": [
+    "anli_gen",
+    "anli_gen_fc7328",
+    "anli_ppl",
+    "anli_ppl_1d290e"
+  ],
+  "anthropics_evals": [
+    "airisk_gen",
+    "airisk_gen_ba66fc",
+    "persona_gen",
+    "persona_gen_cc72e2",
+    "sycophancy_gen",
+    "sycophancy_gen_4bba45"
+  ],
+  "apps": [
+    "apps_gen",
+    "apps_gen_c7893a",
+    "apps_mini_gen",
+    "apps_mini_gen_c7893a",
+    "deprecated_apps_gen_5b4254",
+    "deprecated_apps_gen_7fbb95",
+    "deprecated_apps_gen_b4dee3"
+  ],
+  "atlas": [
+    "atlas_gen",
+    "atlas_val_gen_b2d1b6",
+    "atlas_val_rawprompt_gen_277bee"
+  ],
+  "babilong": [
+    "babilong_0k_gen",
+    "babilong_128k_gen",
+    "babilong_16k_gen",
+    "babilong_1m_gen",
+    "babilong_256k_gen",
+    "babilong_2k_gen",
+    "babilong_32k_gen",
+    "babilong_4k_gen"
+  ],
+  "bbeh": [
+    "bbeh_gen",
+    "bbeh_llmjudge_gen_86c3a0",
+    "bbeh_llmjudge_rawprompt_gen_36b5f4"
+  ],
+  "bbh": [
+    "bbh_0shot_nocot_academic_gen",
+    "bbh_0shot_nocot_gen_925fc4",
+    "bbh_0shot_nocot_gen_9c32f6",
+    "bbh_0shot_nocot_gen_ea7952",
+    "bbh_gen",
+    "bbh_gen_2879b0",
+    "bbh_gen_4a31fa",
+    "bbh_gen_5b92b0",
+    "bbh_gen_5bf00b",
+    "bbh_gen_98fba6",
+    "bbh_gen_ee62e9",
+    "bbh_llm_judge_gen",
+    "bbh_llmjudge_gen_b5bdf1"
+  ],
+  "bigcodebench": [
+    "bigcodebench_full_complete_gen",
+    "bigcodebench_full_complete_gen_faf748",
+    "bigcodebench_full_instruct_gen",
+    "bigcodebench_full_instruct_gen_8815eb",
+    "bigcodebench_full_instruct_repeat_gen_c3d5ad",
+    "bigcodebench_gen",
+    "bigcodebench_hard_complete_gen",
+    "bigcodebench_hard_complete_gen_2888d3",
+    "bigcodebench_hard_complete_gen_faf748",
+    "bigcodebench_hard_complete_rawprompt_gen_95140b",
+    "bigcodebench_hard_instruct_gen",
+    "bigcodebench_hard_instruct_gen_8815eb",
+    "bigcodebench_hard_instruct_gen_c3d5ad",
+    "bigcodebench_hard_instruct_rawprompt_gen_5cbb9f",
+    "bigcodebench_hard_instruct_repeat_gen_c3d5ad"
+  ],
+  "biodata": [
+    "biodata_task_gen",
+    "biodata_task_rawprompt_gen"
+  ],
+  "calm": [
+    "calm"
+  ],
+  "ceval": [
+    "ceval_clean_ppl",
+    "ceval_gen",
+    "ceval_gen_2daf24",
+    "ceval_gen_5f30c7",
+    "ceval_internal_ppl_1cd8bf",
+    "ceval_internal_ppl_93e5ce",
+    "ceval_llm_judge_gen_a162f0",
+    "ceval_ppl",
+    "ceval_ppl_1cd8bf",
+    "ceval_ppl_578f8d",
+    "ceval_ppl_93e5ce",
+    "ceval_zero_shot_gen_bd40ef"
+  ],
+  "chat_OC15": [
+    "chat_OC15"
+  ],
+  "chatobj_custom": [
+    "chatobj_custom_gen"
+  ],
+  "chem_exam": [
+    "competition_gen",
+    "competition_rawprompt_gen",
+    "gaokao_gen",
+    "gaokao_rawprompt_gen"
+  ],
+  "chinese_simpleqa": [
+    "chinese_simpleqa_gen"
+  ],
+  "civilcomments": [
+    "civilcomments_clp",
+    "civilcomments_clp_6a2561",
+    "civilcomments_clp_a3c5fd"
+  ],
+  "clozeTest_maxmin": [
+    "clozeTest_maxmin_gen",
+    "clozeTest_maxmin_gen_c205fb"
+  ],
+  "cmb": [
+    "cmb_gen",
+    "cmb_gen_dfb5c4"
+  ],
+  "cmmlu": [
+    "cmmlu_0shot_cot_gen_305931",
+    "cmmlu_0shot_nocot_llmjudge_gen_e1cd9a",
+    "cmmlu_gen",
+    "cmmlu_gen_c13365",
+    "cmmlu_llm_judge_gen",
+    "cmmlu_llmjudge_gen_e1cd9a",
+    "cmmlu_llmjudge_rawprompt_gen_9f9c31",
+    "cmmlu_ppl",
+    "cmmlu_ppl_041cbf",
+    "cmmlu_ppl_8b9c76",
+    "cmmlu_stem_0shot_nocot_gen_3653db",
+    "cmmlu_stem_0shot_nocot_llmjudge_gen_3653db",
+    "cmmlu_stem_0shot_nocot_xml_gen_3653db"
+  ],
+  "cmo_fib": [
+    "cmo_fib_0shot_notcot_gen_4c6c29",
+    "cmo_fib_gen",
+    "cmo_fib_gen_2783e5",
+    "cmo_fib_gen_ace24b"
+  ],
+  "codecompass": [
+    "codecompass_gen_079a6c"
+  ],
+  "collections": [
+    "base_core",
+    "base_medium",
+    "base_medium_llama",
+    "base_small",
+    "chat_core",
+    "chat_medium",
+    "chat_small",
+    "qwen",
+    "qwen_chat"
+  ],
+  "commonsenseqa": [
+    "commonsenseqa_7shot_cot_gen_734a22",
+    "commonsenseqa_gen",
+    "commonsenseqa_gen_1da2d0",
+    "commonsenseqa_gen_c946f2",
+    "commonsenseqa_ppl",
+    "commonsenseqa_ppl_3e9f2d",
+    "commonsenseqa_ppl_5545e2",
+    "commonsenseqa_ppl_716f78",
+    "commonsenseqa_ppl_c49e77",
+    "commonsenseqa_ppl_e51e32"
+  ],
+  "commonsenseqa_cn": [
+    "commonsenseqacn_gen",
+    "commonsenseqacn_gen_d380d0",
+    "commonsenseqacn_ppl",
+    "commonsenseqacn_ppl_971f48"
+  ],
+  "compassbench_20_v1_1": [
+    "cibench_template_gen_e6b12a",
+    "compassbench_v1_1_code_gen_986f01",
+    "compassbench_v1_1_math_gen_1dc21d",
+    "compassbench_v1_knowledge_gen_bd74e0",
+    "compassbench_v1_language_gen_7aa06d",
+    "compassbench_v1_reason_gen_d26d08",
+    "mus_teval_gen_105c48"
+  ],
+  "compassbench_20_v1_1_public": [
+    "cibench_template_gen_e6b12a",
+    "compassbench_v1_1_code_gen_986f01",
+    "compassbench_v1_1_math_gen_1dc21d",
+    "compassbench_v1_knowledge_gen_bd74e0",
+    "compassbench_v1_language_gen_7aa06d",
+    "compassbench_v1_reason_gen_d26d08",
+    "mus_teval_gen_105c48"
+  ],
+  "compassbench_v1_3": [
+    "compassbench_v1_3_code_gen_c8c3aa",
+    "compassbench_v1_3_knowledge",
+    "compassbench_v1_3_math",
+    "compassbench_v1_3_objective_gen",
+    "compassbench_v1_3_objective_gen_068af0"
+  ],
+  "contamination": [
+    "ceval_contamination_ppl_810ec6",
+    "mbpp_contamination_ppl_f01cb6",
+    "mmlu_contamination_ppl_810ec6"
+  ],
+  "crowspairs": [
+    "crowspairs_gen",
+    "crowspairs_gen_02b6c1",
+    "crowspairs_gen_381af0",
+    "crowspairs_ppl",
+    "crowspairs_ppl_47f211",
+    "crowspairs_ppl_e811e1"
+  ],
+  "crowspairs_cn": [
+    "crowspairscn_gen",
+    "crowspairscn_gen_556dc9",
+    "crowspairscn_ppl",
+    "crowspairscn_ppl_f53575"
+  ],
+  "cvalues": [
+    "cvalues_responsibility_gen",
+    "cvalues_responsibility_gen_543378"
+  ],
+  "demo": [
+    "demo_cmmlu_base_ppl",
+    "demo_cmmlu_chat_gen",
+    "demo_gsm8k_base_gen",
+    "demo_gsm8k_chat_gen",
+    "demo_math_base_gen",
+    "demo_math_chat_gen"
+  ],
+  "dingo": [
+    "dingo_gen"
+  ],
+  "drop": [
+    "deprecated_drop_gen_8a9ed9",
+    "drop_gen",
+    "drop_gen_a2697c",
+    "drop_gen_eb14af",
+    "drop_llm_judge_gen",
+    "drop_llmjudge_gen_3857b0",
+    "drop_openai_simple_evals_gen_3857b0"
+  ],
+  "ds1000": [
+    "ds1000_compl_gen_cbc84f",
+    "ds1000_compl_service_eval_gen_cbc84f",
+    "ds1000_gen_5c4bec",
+    "ds1000_gen_cbc84f",
+    "ds1000_service_eval_gen_cbc84f"
+  ],
+  "eese": [
+    "eese_llm_judge_gen"
+  ],
+  "flores": [
+    "flores_gen",
+    "flores_gen_806ede",
+    "flores_gen_aad4fd"
+  ],
+  "game24": [
+    "game24_gen",
+    "game24_gen_52a460"
+  ],
+  "gaokao_math": [
+    "gaokao_math_gen_f5fd28"
+  ],
+  "govrepcrs": [
+    "govrepcrs_gen",
+    "govrepcrs_gen_aa5eb3",
+    "govrepcrs_gen_db7930"
+  ],
+  "gpqa": [
+    "gpqa_0shot_nocot_gen_772ea0",
+    "gpqa_0shot_nocot_genericllmeval_gen_772ea0",
+    "gpqa_0shot_nocot_genericllmeval_xml_gen_772ea0",
+    "gpqa_0shot_nocot_llmjudge_gen_772ea0",
+    "gpqa_cascade_eval_academic",
+    "gpqa_cascade_eval_gen_772ea0",
+    "gpqa_cascade_eval_rawprompt_gen_706039",
+    "gpqa_few_shot_ppl_4b5a83",
+    "gpqa_gen",
+    "gpqa_gen_015262",
+    "gpqa_gen_4baadb",
+    "gpqa_llm_judge_gen",
+    "gpqa_openai_simple_evals_gen_5aeece",
+    "gpqa_ppl_6bf57a"
+  ],
+  "gsm8k": [
+    "deprecated_gsm8k_agent_gen_be1606",
+    "gsm8k_0shot_gen_a58960",
+    "gsm8k_0shot_nocot_gen_6cbf22",
+    "gsm8k_0shot_v2_gen_17d799",
+    "gsm8k_0shot_v2_gen_6e39a4",
+    "gsm8k_0shot_v2_gen_a58960",
+    "gsm8k_agent_gen_c3dff3",
+    "gsm8k_gen",
+    "gsm8k_gen_17d0dc",
+    "gsm8k_gen_1d7fe4",
+    "gsm8k_gen_1dce88",
+    "gsm8k_gen_3309bd",
+    "gsm8k_gen_57b0b1",
+    "gsm8k_gen_701491",
+    "gsm8k_gen_a3e34a",
+    "gsm8k_gen_d6de81",
+    "gsm8k_gen_e9e91e",
+    "gsm8k_gen_ee684f",
+    "gsm8k_model_postprocess_gen_a58960",
+    "gsm8k_xfinder_gen_a58960"
+  ],
+  "gsm8k_contamination": [
+    "gsm8k_contamination_ppl_ecdd22"
+  ],
+  "gsm_hard": [
+    "gsmhard_gen",
+    "gsmhard_gen_8a1400"
+  ],
+  "hellaswag": [
+    "hellaswag_10shot_gen_e42710",
+    "hellaswag_10shot_ppl_59c85e",
+    "hellaswag_clean_ppl",
+    "hellaswag_gen",
+    "hellaswag_gen_6faab5",
+    "hellaswag_llm_judge_gen",
+    "hellaswag_llmjudge_gen_809ef1",
+    "hellaswag_ppl",
+    "hellaswag_ppl_47bff9",
+    "hellaswag_ppl_7d7f2d",
+    "hellaswag_ppl_9dbb12",
+    "hellaswag_ppl_a6e128"
+  ],
+  "hmmt2026": [
+    "hmmt2026_cascade_eval_gen_6ff468",
+    "hmmt2026_cascade_eval_rawprompt_gen_0970dd"
+  ],
+  "humaneval": [
+    "deprecated_humaneval_gen_4a6eef",
+    "deprecated_humaneval_gen_6d1cc2",
+    "deprecated_humaneval_gen_a82cae",
+    "deprecated_humaneval_gen_d2537e",
+    "deprecated_humaneval_gen_fd5822",
+    "deprecated_humaneval_gen_ff7054",
+    "humaneval_gen",
+    "humaneval_gen_66a7f4",
+    "humaneval_gen_8e312c",
+    "humaneval_openai_sample_evals_gen_159614",
+    "humaneval_openai_sample_evals_gen_dcae0e",
+    "humaneval_openai_sample_evals_o1_gen_5e7b00",
+    "humaneval_openai_sample_evals_rawprompt_gen_6ce2ca",
+    "humaneval_openai_sample_evals_repeat_gen_dcae0e",
+    "humaneval_passk_gen_8e312c",
+    "humaneval_repeat10_gen_8e312c",
+    "internal_humaneval_gen_ce6b06",
+    "internal_humaneval_gen_d2537e"
+  ],
+  "humaneval_cn": [
+    "humaneval_cn_gen",
+    "humaneval_cn_gen_6313aa",
+    "humaneval_cn_passk_gen_6313aa",
+    "humaneval_cn_repeat10_gen_6313aa"
+  ],
+  "humaneval_multi": [
+    "humaneval_multi_gen",
+    "humaneval_multi_gen_82cf85"
+  ],
+  "humaneval_plus": [
+    "humaneval_plus_gen",
+    "humaneval_plus_gen_66a7f4",
+    "humaneval_plus_gen_8e312c",
+    "humaneval_plus_openai_simple_evals_gen_159614",
+    "humaneval_plus_passk_gen_8e312c",
+    "humaneval_plus_repeat10_gen_8e312c",
+    "humaneval_plus_repeat_gen_41b01c"
+  ],
+  "humaneval_pro": [
+    "humaneval_pro_gen",
+    "humaneval_pro_gen_3dc067",
+    "humaneval_pro_repeat_gen_3dc067"
+  ],
+  "humanevalx": [
+    "humanevalx_0shot_nocot_gen_3e4bbd",
+    "humanevalx_gen",
+    "humanevalx_gen_0af626",
+    "humanevalx_gen_3d84a3",
+    "humanevalx_gen_620cfa",
+    "humanevalx_repeat_gen_3d84a3"
+  ],
+  "hungarian_exam": [
+    "hungarian_exam_gen",
+    "hungarian_exam_gen_8a1435"
+  ],
+  "inference_ppl": [
+    "inference_ppl"
+  ],
+  "infinitebench": [
+    "infinitebench",
+    "infinitebench_codedebug_gen",
+    "infinitebench_codedebug_gen_276a42",
+    "infinitebench_coderun_gen",
+    "infinitebench_coderun_gen_1a76bd",
+    "infinitebench_endia_gen",
+    "infinitebench_endia_gen_c96eb5",
+    "infinitebench_enmc_gen",
+    "infinitebench_enmc_gen_3a4102",
+    "infinitebench_enqa_gen",
+    "infinitebench_enqa_gen_a1640c",
+    "infinitebench_ensum_gen",
+    "infinitebench_ensum_gen_cfbc08",
+    "infinitebench_mathcalc_gen",
+    "infinitebench_mathcalc_gen_78d17e",
+    "infinitebench_mathfind_gen",
+    "infinitebench_mathfind_gen_6d799e",
+    "infinitebench_retrievekv_gen",
+    "infinitebench_retrievekv_gen_06b3ac",
+    "infinitebench_retrievenumber_gen",
+    "infinitebench_retrievenumber_gen_047436",
+    "infinitebench_retrievepasskey_gen",
+    "infinitebench_retrievepasskey_gen_62ff68",
+    "infinitebench_zhqa_gen",
+    "infinitebench_zhqa_gen_1e5293"
+  ],
+  "internsandbox": [
+    "internsandbox_gen",
+    "internsandbox_gen_44b982"
+  ],
+  "iwslt2017": [
+    "iwslt2017_gen",
+    "iwslt2017_gen_69ce16",
+    "iwslt2017_gen_b4a814",
+    "iwslt2017_gen_d0ebd1"
+  ],
+  "jigsawmultilingual": [
+    "jigsawmultilingual_clp",
+    "jigsawmultilingual_clp_1af0ae",
+    "jigsawmultilingual_clp_fe50d8"
+  ],
+  "judge": [
+    "judgebench",
+    "judgerbenchv2",
+    "rewardbench",
+    "rmb"
+  ],
+  "kaoshi": [
+    "kaoshi_gen",
+    "kaoshi_gen_86aca2"
+  ],
+  "kcle": [
+    "kcle_llm_judge_gen",
+    "kcle_llm_judge_gen_60327a",
+    "kcle_llm_judge_rawprompt_gen_16e383"
+  ],
+  "korbench": [
+    "korbench_gen",
+    "korbench_llm_judge_gen",
+    "korbench_llmjudge_gen_17854d",
+    "korbench_llmjudge_gen_56cf43",
+    "korbench_mixed_gen_d00bdd",
+    "korbench_single_0_shot_gen",
+    "korbench_single_0shot_cascade_eval_gen_56cf43",
+    "korbench_single_0shot_cascade_eval_rawprompt_gen_c048da",
+    "korbench_single_0shot_genericllmeval_gen_17854d",
+    "korbench_single_0shot_llmjudge_gen",
+    "korbench_single_3_shot_gen"
+  ],
+  "lambada": [
+    "lambada_gen",
+    "lambada_gen_217e11",
+    "lambada_gen_8b48a5"
+  ],
+  "lawbench": [
+    "lawbench_one_shot_gen_002588",
+    "lawbench_zero_shot_gen_002588"
+  ],
+  "lcsts": [
+    "lcsts_gen",
+    "lcsts_gen_8ee1fe",
+    "lcsts_gen_9b0b89"
+  ],
+  "leval": [
+    "leval",
+    "leval_coursera_gen",
+    "leval_coursera_gen_36a006",
+    "leval_financialqa_gen",
+    "leval_financialqa_gen_b03798",
+    "leval_gov_report_summ_gen",
+    "leval_gov_report_summ_gen_b03798",
+    "leval_gsm100_gen",
+    "leval_gsm100_gen_77dd94",
+    "leval_legalcontractqa_gen",
+    "leval_legalcontractqa_gen_68a2ac",
+    "leval_meetingsumm_gen",
+    "leval_meetingsumm_gen_b03798",
+    "leval_multidocqa_gen",
+    "leval_multidocqa_gen_96bf3f",
+    "leval_narrativeqa_gen",
+    "leval_narrativeqa_gen_766dd0",
+    "leval_naturalquestion_gen",
+    "leval_naturalquestion_gen_52c33f",
+    "leval_newssumm_gen",
+    "leval_newssumm_gen_b03798",
+    "leval_paper_assistant_gen",
+    "leval_paper_assistant_gen_b03798",
+    "leval_patent_summ_gen",
+    "leval_patent_summ_gen_b03798",
+    "leval_quality_gen",
+    "leval_quality_gen_36a006",
+    "leval_review_summ_gen",
+    "leval_review_summ_gen_b03798",
+    "leval_scientificqa_gen",
+    "leval_scientificqa_gen_96bf3f",
+    "leval_topic_retrieval_gen",
+    "leval_topic_retrieval_gen_bf433f",
+    "leval_tpo_gen",
+    "leval_tpo_gen_36a006",
+    "leval_tvshow_summ_gen",
+    "leval_tvshow_summ_gen_b03798"
+  ],
+  "livecodebench": [
+    "livecodebench_code_generation_repeat_gen_b5b6c5",
+    "livecodebench_gen",
+    "livecodebench_gen_6966bc",
+    "livecodebench_gen_a4f90b",
+    "livecodebench_gen_b2b0fd",
+    "livecodebench_o1_gen_f0ed6c",
+    "livecodebench_rawprompt_gen_c09673",
+    "livecodebench_split_v4_o1_gen_f0ed6c",
+    "livecodebench_split_v4_o1_postprocess_gen_f0ed6c",
+    "livecodebench_time_split_gen_a4f90b",
+    "livecodebench_v1_o1_gen_f0ed6c",
+    "livecodebench_v6_academic"
+  ],
+  "livecodebench_pro": [
+    "livecodebench_pro_gen",
+    "livecodebench_pro_rawprompt_gen"
+  ],
+  "livemathbench": [
+    "livemathbench_gen",
+    "livemathbench_gen_6eb711",
+    "livemathbench_gen_9befbf",
+    "livemathbench_gen_caed8f",
+    "livemathbench_greedy_gen",
+    "livemathbench_greedy_gen_9befbf",
+    "livemathbench_hard_custom_cascade_eval_gen_4bce59",
+    "livemathbench_hard_custom_cascade_eval_rawprompt_gen_e1ce64",
+    "livemathbench_hard_custom_llmverify_gen_85d0ef",
+    "livemathbench_hard_gen_353ae7",
+    "livemathbench_hard_greedy_gen_353ae7",
+    "livemathbench_hard_llmjudge_gen_71eaf5",
+    "livemathbench_v202505_gen_9befbf",
+    "livemathbench_v202505_greedy_gen_9befbf",
+    "livemathbench_v202505_hard_gen_353ae7",
+    "livemathbench_v202505_hard_greedy_gen_353ae7"
+  ],
+  "livereasonbench": [
+    "livereasonbench_gen",
+    "livereasonbench_gen_f990de",
+    "livereasonbench_genericllmeval_gen_f990de",
+    "livereasonbench_llmverify_20250428_gen_0484cb"
+  ],
+  "livestembench": [
+    "livestembench_0shot_noncot_gen_2e6d10",
+    "livestembench_0shot_noncot_xml_gen_2e6d10",
+    "livestembench_gen",
+    "livestembench_gen_3e3c50"
+  ],
+  "llm_compression": [
+    "llm_compression"
+  ],
+  "longbench": [
+    "longbench",
+    "longbench_2wikimqa_gen",
+    "longbench_2wikimqa_gen_6b3efc",
+    "longbench_dureader_gen",
+    "longbench_dureader_gen_c6c7e4",
+    "longbench_gov_report_gen",
+    "longbench_gov_report_gen_54c5b0",
+    "longbench_hotpotqa_gen",
+    "longbench_hotpotqa_gen_6b3efc",
+    "longbench_lcc_gen",
+    "longbench_lcc_gen_6ba507",
+    "longbench_lsht_gen",
+    "longbench_lsht_gen_e8a339",
+    "longbench_multi_news_gen",
+    "longbench_multi_news_gen_6f9da9",
+    "longbench_multifieldqa_en_gen",
+    "longbench_multifieldqa_en_gen_d3838e",
+    "longbench_multifieldqa_zh_gen",
+    "longbench_multifieldqa_zh_gen_e9a7ef",
+    "longbench_musique_gen",
+    "longbench_musique_gen_6b3efc",
+    "longbench_narrativeqa_gen",
+    "longbench_narrativeqa_gen_a68305",
+    "longbench_passage_count_gen",
+    "longbench_passage_count_gen_dcdaab",
+    "longbench_passage_retrieval_en_gen",
+    "longbench_passage_retrieval_en_gen_734db5",
+    "longbench_passage_retrieval_zh_gen",
+    "longbench_passage_retrieval_zh_gen_01cca2",
+    "longbench_qasper_gen",
+    "longbench_qasper_gen_6b3efc",
+    "longbench_qmsum_gen",
+    "longbench_qmsum_gen_d33331",
+    "longbench_repobench_gen",
+    "longbench_repobench_gen_6df953",
+    "longbench_samsum_gen",
+    "longbench_samsum_gen_f4416d",
+    "longbench_trec_gen",
+    "longbench_trec_gen_824187",
+    "longbench_triviaqa_gen",
+    "longbench_triviaqa_gen_d30cb9",
+    "longbench_vcsum_gen",
+    "longbench_vcsum_gen_f7a8ac"
+  ],
+  "longbenchv2": [
+    "longbenchv2_gen",
+    "longbenchv2_gen_75fbba"
+  ],
+  "lveval": [
+    "lveval",
+    "lveval_cmrc_mixup_gen",
+    "lveval_cmrc_mixup_gen_465823",
+    "lveval_dureader_mixup_gen",
+    "lveval_dureader_mixup_gen_465823",
+    "lveval_factrecall_en_gen",
+    "lveval_factrecall_en_gen_9a836f",
+    "lveval_factrecall_zh_gen",
+    "lveval_factrecall_zh_gen_dbee70",
+    "lveval_hotpotwikiqa_mixup_gen",
+    "lveval_hotpotwikiqa_mixup_gen_77ce82",
+    "lveval_lic_mixup_gen",
+    "lveval_lic_mixup_gen_01eb0c",
+    "lveval_loogle_CR_mixup_gen",
+    "lveval_loogle_CR_mixup_gen_d7ea36",
+    "lveval_loogle_MIR_mixup_gen",
+    "lveval_loogle_MIR_mixup_gen_d7ea36",
+    "lveval_loogle_SD_mixup_gen",
+    "lveval_loogle_SD_mixup_gen_d7ea36",
+    "lveval_multifieldqa_en_mixup_gen",
+    "lveval_multifieldqa_en_mixup_gen_d7ea36",
+    "lveval_multifieldqa_zh_mixup_gen",
+    "lveval_multifieldqa_zh_mixup_gen_0fbdad"
+  ],
+  "mastermath2024v1": [
+    "mastermath2024v1_gen",
+    "mastermath2024v1_gen_be6318"
+  ],
+  "matbench": [
+    "matbench_gen",
+    "matbench_gen_f71840",
+    "matbench_llm_judge_gen_0e9276",
+    "matbench_llm_judge_rawprompt_gen_c987b6",
+    "matbench_regex_judge_gen_0e9276"
+  ],
+  "math": [
+    "deprecated_math_agent_evaluatorv2_gen_861b4f",
+    "deprecated_math_evaluatorv2_gen_265cce",
+    "math_0shot_gen_11c4b5",
+    "math_0shot_gen_393424",
+    "math_0shot_llm_judge_gen_393424",
+    "math_0shot_llm_judge_v2_gen_31d777",
+    "math_4shot_base_gen_43d5b6",
+    "math_4shot_base_gen_db136b",
+    "math_4shot_example_from_google_research",
+    "math_500_cascade_eval_gen_6ff468",
+    "math_500_cascade_eval_rawprompt_gen_0970dd",
+    "math_500_gen",
+    "math_500_llmjudge_gen_6ff468",
+    "math_agent_evaluatorv2_gen_0c1b4e",
+    "math_agent_gen_0c1b4e",
+    "math_agent_gen_861b4f",
+    "math_agent_gen_af2293",
+    "math_evaluatorv2_gen_2f4a71",
+    "math_evaluatorv2_gen_cecb31",
+    "math_gen",
+    "math_gen_0957ff",
+    "math_gen_1ed9c2",
+    "math_gen_265cce",
+    "math_gen_559593",
+    "math_gen_5e8458",
+    "math_gen_736506",
+    "math_gen_78ced2",
+    "math_gen_943d32",
+    "math_gen_a58d9d",
+    "math_intern_evaluator_gen_265cce",
+    "math_llm_judge_gen",
+    "math_llm_judge_gen_56606f",
+    "math_prm800k_500_0shot_cot_academic_gen",
+    "math_prm800k_500_0shot_cot_gen",
+    "math_prm800k_500_0shot_cot_gen_11c4b5",
+    "math_prm800k_500_0shot_nocot_gen_b27274",
+    "math_prm800k_500_0shot_nocot_genericllmeval_gen_63a000",
+    "math_prm800k_500_0shot_nocot_genericllmeval_gen_6ff468",
+    "math_prm800k_500_0shot_nocot_genericllmeval_xml_gen_63a000",
+    "math_prm800k_500_0shot_nocot_llmjudge_gen_63a000",
+    "math_prm800k_500_gen",
+    "math_prm800k_500_gen_393424",
+    "math_prm800k_500_llm_judge_gen",
+    "math_prm800k_500_llmverify_gen_6ff468",
+    "math_prm800k_500_llmverify_repeat4_gen_97b203"
+  ],
+  "math_500": [
+    "math_500_cascade_eval_gen_6ff468",
+    "math_500_cascade_eval_rawprompt_gen_0970dd",
+    "math_500_gen",
+    "math_500_llmjudge_gen_6ff468"
+  ],
+  "math401": [
+    "math401_gen",
+    "math401_gen_ab5f39"
+  ],
+  "mbpp": [
+    "deprecated_mbpp_gen_1e1056",
+    "deprecated_mbpp_gen_6590b0",
+    "deprecated_mbpp_gen_caa7ab",
+    "deprecated_mbpp_passk_gen_1e1056",
+    "deprecated_mbpp_repeat10_gen_1e1056",
+    "deprecated_sanitized_mbpp_gen_1e1056",
+    "deprecated_sanitized_mbpp_gen_cb43ef",
+    "deprecated_sanitized_mbpp_passk_gen_1e1056",
+    "deprecated_sanitized_mbpp_repeat10_gen_1e1056",
+    "mbpp_gen",
+    "mbpp_gen_830460",
+    "mbpp_passk_gen_830460",
+    "mbpp_repeat10_gen_830460",
+    "mbpp_repeat_gen_18dd1b",
+    "sanitized_mbpp_gen_742f0c",
+    "sanitized_mbpp_gen_830460",
+    "sanitized_mbpp_gen_a0fc46",
+    "sanitized_mbpp_mdblock_0shot_nocot_gen_a2e416",
+    "sanitized_mbpp_mdblock_0shot_nocot_rawprompt_gen_30c1e5",
+    "sanitized_mbpp_mdblock_gen_a447ff",
+    "sanitized_mbpp_passk_gen_830460",
+    "sanitized_mbpp_repeat10_gen_830460"
+  ],
+  "mbpp_cn": [
+    "deprecated_mbpp_cn_gen_1d1481",
+    "deprecated_mbpp_cn_passk_gen_1d1481",
+    "deprecated_mbpp_cn_repeat10_gen_1d1481",
+    "mbpp_cn_gen",
+    "mbpp_cn_gen_9114d5"
+  ],
+  "mbpp_plus": [
+    "deprecated_mbpp_plus_gen_94815c",
+    "mbpp_plus_gen",
+    "mbpp_plus_gen_0b836a"
+  ],
+  "mbpp_pro": [
+    "mbpp_pro_gen",
+    "mbpp_pro_gen_3dc067",
+    "mbpp_pro_repeat_gen_3dc067"
+  ],
+  "medmcqa": [
+    "medmcqa_gen",
+    "medmcqa_gen_60c8f5",
+    "medmcqa_llmjudge_gen",
+    "medmcqa_llmjudge_gen_60c8f5",
+    "medmcqa_llmjudge_rawprompt_gen_015178"
+  ],
+  "mgsm": [
+    "mgsm_gen",
+    "mgsm_gen_d967bc"
+  ],
+  "mmlu": [
+    "mmlu_clean_ppl",
+    "mmlu_gen",
+    "mmlu_gen_23a9a9",
+    "mmlu_gen_4d595a",
+    "mmlu_gen_5d1409",
+    "mmlu_gen_79e572",
+    "mmlu_gen_a484b3",
+    "mmlu_llm_judge_gen",
+    "mmlu_llmjudge_gen_f4336b",
+    "mmlu_llmjudge_rawprompt_gen_af67f0",
+    "mmlu_model_postprocess_gen_4d595a",
+    "mmlu_openai_0shot_nocot_llmjudge_gen_216503",
+    "mmlu_openai_simple_evals_gen_b618ea",
+    "mmlu_ppl",
+    "mmlu_ppl_ac766d",
+    "mmlu_stem_0shot_cascade_eval_gen_216503",
+    "mmlu_stem_0shot_gen_216503",
+    "mmlu_stem_0shot_xml_gen_216503",
+    "mmlu_stem_sets",
+    "mmlu_xfinder_gen_4d595a",
+    "mmlu_zero_shot_gen_47e2c0"
+  ],
+  "mmlu_cf": [
+    "mmlu_cf_few_shot",
+    "mmlu_cf_gen",
+    "mmlu_cf_gen_040615",
+    "mmlu_cf_zero_shot"
+  ],
+  "mmlu_pro": [
+    "mmlu_pro_0shot_cot_gen_08c1de",
+    "mmlu_pro_0shot_nocot_genericllmeval_gen_08c1de",
+    "mmlu_pro_0shot_nocot_genericllmeval_rawprompt_gen_0321fb",
+    "mmlu_pro_biomed_0shot_cot_gen_057927",
+    "mmlu_pro_biomed_0shot_nocot_genericllmeval_gen_057927",
+    "mmlu_pro_few_shot_gen_bfaf90",
+    "mmlu_pro_gen",
+    "mmlu_pro_gen_cdbebf",
+    "mmlu_pro_llm_judge_gen"
+  ],
+  "mmmlu": [
+    "mmmlu_5_shot_gen_bcbeb3",
+    "mmmlu_gen",
+    "mmmlu_gen_c51a84"
+  ],
+  "mmmlu_lite": [
+    "mmmlu_lite_gen",
+    "mmmlu_lite_gen_c51a84"
+  ],
+  "multipl_e": [
+    "multiple_gen",
+    "multiple_top_ten_gen_f44aaf",
+    "multiple_top_ten_repeat_gen_0cd6ce"
+  ],
+  "musr": [
+    "musr_gen",
+    "musr_gen_3622bb",
+    "musr_gen_3c6e15",
+    "musr_gen_b47fd3",
+    "musr_llm_judge_gen",
+    "musr_llmjudge_gen_b47fd3"
+  ],
+  "narrativeqa": [
+    "narrativeqa_gen",
+    "narrativeqa_gen_a2d88a",
+    "narrativeqa_gen_db6413"
+  ],
+  "needlebench": [
+    "atc",
+    "atc_choice",
+    "atc_choice_20",
+    "atc_choice_50",
+    "atc_choice_50_en_reasoning",
+    "atc_choice_80",
+    "atc_choice_80_en_reasoning",
+    "needlebench_1000k",
+    "needlebench_128k",
+    "needlebench_200k",
+    "needlebench_256k",
+    "needlebench_32k",
+    "needlebench_4k",
+    "needlebench_8k",
+    "needlebench_base_gen",
+    "needlebench_multi_reasoning_1000k",
+    "needlebench_multi_reasoning_128k",
+    "needlebench_multi_reasoning_200k",
+    "needlebench_multi_reasoning_256k",
+    "needlebench_multi_reasoning_32k",
+    "needlebench_multi_reasoning_4k",
+    "needlebench_multi_reasoning_8k",
+    "needlebench_multi_retrieval_1000k",
+    "needlebench_multi_retrieval_128k",
+    "needlebench_multi_retrieval_200k",
+    "needlebench_multi_retrieval_256k",
+    "needlebench_multi_retrieval_32k",
+    "needlebench_multi_retrieval_4k",
+    "needlebench_multi_retrieval_8k",
+    "needlebench_multi_retrieval_compare_batch_8k",
+    "needlebench_single",
+    "needlebench_single_1000k",
+    "needlebench_single_128k",
+    "needlebench_single_200k",
+    "needlebench_single_256k",
+    "needlebench_single_32k",
+    "needlebench_single_4k",
+    "needlebench_single_8k"
+  ],
+  "needlebench_v2": [
+    "atc_0shot_nocot_2_power_en",
+    "needlebench_v2_1000k",
+    "needlebench_v2_128k",
+    "needlebench_v2_200k",
+    "needlebench_v2_256k",
+    "needlebench_v2_32k",
+    "needlebench_v2_4k",
+    "needlebench_v2_8k",
+    "needlebench_v2_multi_reasoning_1000k",
+    "needlebench_v2_multi_reasoning_128k",
+    "needlebench_v2_multi_reasoning_200k",
+    "needlebench_v2_multi_reasoning_256k",
+    "needlebench_v2_multi_reasoning_32k",
+    "needlebench_v2_multi_reasoning_4k",
+    "needlebench_v2_multi_reasoning_8k",
+    "needlebench_v2_multi_retrieval_1000k",
+    "needlebench_v2_multi_retrieval_128k",
+    "needlebench_v2_multi_retrieval_200k",
+    "needlebench_v2_multi_retrieval_256k",
+    "needlebench_v2_multi_retrieval_32k",
+    "needlebench_v2_multi_retrieval_4k",
+    "needlebench_v2_multi_retrieval_8k",
+    "needlebench_v2_multi_retrieval_compare_batch_8k",
+    "needlebench_v2_single_1000k",
+    "needlebench_v2_single_128k",
+    "needlebench_v2_single_200k",
+    "needlebench_v2_single_256k",
+    "needlebench_v2_single_32k",
+    "needlebench_v2_single_4k",
+    "needlebench_v2_single_8k"
+  ],
+  "nejm_ai_benchmark": [
+    "nejmaibench_gen",
+    "nejmaibench_gen_60c8f5",
+    "nejmaibench_llmjudge_gen",
+    "nejmaibench_llmjudge_gen_60c8f5"
+  ],
+  "nq": [
+    "nq_gen",
+    "nq_gen_0356ec",
+    "nq_gen_2463e2",
+    "nq_gen_3dcea1",
+    "nq_gen_68c1c6",
+    "nq_gen_c788f6",
+    "nq_open_1shot_gen_01cf41",
+    "nq_open_1shot_gen_20a989",
+    "nq_open_1shot_gen_2e45e5",
+    "nq_open_gen_e93f8a",
+    "nq_xfinder_gen_3dcea1"
+  ],
+  "nq_cn": [
+    "nqcn_gen",
+    "nqcn_gen_141737"
+  ],
+  "obqa": [
+    "obqa_gen",
+    "obqa_gen_9069e4",
+    "obqa_ppl",
+    "obqa_ppl_1defe8",
+    "obqa_ppl_6aac9e",
+    "obqa_ppl_c7c154"
+  ],
+  "ojbench": [
+    "ojbench_gen"
+  ],
+  "omni_math": [
+    "omni_math_cascade_eval_gen_ccf9c0",
+    "omni_math_gen",
+    "omni_math_gen_18cc08",
+    "omni_math_llmverify_gen_ccf9c0"
+  ],
+  "openswi": [
+    "openswi_gen",
+    "openswi_rawprompt_gen"
+  ],
+  "piqa": [
+    "piqa_gen",
+    "piqa_gen_1194eb",
+    "piqa_ppl",
+    "piqa_ppl_0cfff2",
+    "piqa_ppl_1cf9f0",
+    "piqa_ppl_3431ea"
+  ],
+  "promptbench": [
+    "promptbench_iwslt2017_gen_cbb8c8",
+    "promptbench_math_gen_abf776",
+    "promptbench_squad20_gen_b15d1c",
+    "promptbench_wnli_gen_50662f"
+  ],
+  "py150": [
+    "py150_gen",
+    "py150_gen_38b13d"
+  ],
+  "qabench": [
+    "qabench_gen",
+    "qabench_gen_353ae7"
+  ],
+  "qasper": [
+    "qasper_gen",
+    "qasper_gen_a2d88a",
+    "qasper_gen_db6413"
+  ],
+  "qaspercut": [
+    "qaspercut_gen",
+    "qaspercut_gen_a2d88a",
+    "qaspercut_gen_db6413"
+  ],
+  "race": [
+    "race_cot_gen_d95929",
+    "race_few_shot_gen_a498ed",
+    "race_few_shot_ppl",
+    "race_gen",
+    "race_gen_69ee4f",
+    "race_gen_9302a5",
+    "race_ppl",
+    "race_ppl_5831a0",
+    "race_ppl_a138cd",
+    "race_ppl_abed12"
+  ],
+  "realtoxicprompts": [
+    "realtoxicprompts_gen",
+    "realtoxicprompts_gen_7605e4",
+    "realtoxicprompts_gen_ac723c"
+  ],
+  "rolebench": [
+    "instruction_generalization_eng",
+    "instruction_generalization_zh",
+    "role_generalization_eng"
+  ],
+  "ruler": [
+    "ruler_128k_gen",
+    "ruler_16k_gen",
+    "ruler_1m_gen",
+    "ruler_256k_gen",
+    "ruler_32k_gen",
+    "ruler_4k_gen",
+    "ruler_512k_gen",
+    "ruler_64k_gen",
+    "ruler_8k_gen",
+    "ruler_combined_gen",
+    "ruler_cwe_gen",
+    "ruler_fwe_gen",
+    "ruler_niah_gen",
+    "ruler_qa_gen",
+    "ruler_vt_gen"
+  ],
+  "s3eval": [
+    "s3eval_gen",
+    "s3eval_gen_b8ac80"
+  ],
+  "safety": [
+    "safety_gen",
+    "safety_gen_7ce197"
+  ],
+  "scibench": [
+    "scibench_gen",
+    "scibench_gen_2b21f3"
+  ],
+  "scicode": [
+    "scicode_gen",
+    "scicode_gen_085b98",
+    "scicode_gen_62c139",
+    "scicode_wbg_gen_085b98"
+  ],
+  "siqa": [
+    "siqa_gen",
+    "siqa_gen_18632c",
+    "siqa_gen_e78df3",
+    "siqa_ppl",
+    "siqa_ppl_42bc6e",
+    "siqa_ppl_7845b0",
+    "siqa_ppl_ced5f6",
+    "siqa_ppl_e8d8c5"
+  ],
+  "squad20": [
+    "squad20_gen",
+    "squad20_gen_1710bc"
+  ],
+  "srbench": [
+    "srbench_gen",
+    "srbench_rawprompt_gen"
+  ],
+  "storycloze": [
+    "storycloze_gen",
+    "storycloze_gen_7f656a",
+    "storycloze_ppl",
+    "storycloze_ppl_496661",
+    "storycloze_ppl_afd16f"
+  ],
+  "strategyqa": [
+    "strategyqa_gen",
+    "strategyqa_gen_1180a7",
+    "strategyqa_gen_934441"
+  ],
+  "subjective": [
+    "alignbench_judgeby_critiquellm",
+    "alignbench_judgeby_critiquellm_new",
+    "alignbench_v1_1_judgeby_critiquellm",
+    "alignbench_v1_1_judgeby_critiquellm_new",
+    "alpacav2_judgeby_gpt4",
+    "alpacav2_judgeby_gpt4_bradleyterry",
+    "alpacav2_judgeby_gpt4_new",
+    "arena_hard_compare",
+    "arena_hard_compare_bradleyterry",
+    "arena_hard_compare_new",
+    "compassarena_compare",
+    "compassarena_compare_bradleyterry",
+    "compassarena_compare_new",
+    "compassbench_checklist",
+    "compassbench_compare",
+    "compassbench_compare_v11",
+    "compassbench_compare_v11_patch",
+    "compassbench_compare_v12",
+    "flames_gen",
+    "flames_gen_1a58bb",
+    "fofo_bilingual_judge",
+    "fofo_bilingual_judge_new",
+    "fofo_judge",
+    "fofo_judge_new",
+    "followbench_llmeval",
+    "followbench_llmeval_new",
+    "hellobench",
+    "judgerbench",
+    "mtbench101_judge",
+    "mtbench101_judge_new",
+    "mtbench_single_judge_diff_temp",
+    "mtbench_single_judge_diff_temp_new",
+    "pairwise_bt_judge",
+    "pairwise_judge",
+    "pointwise_judge",
+    "wildbench_pair_judge",
+    "wildbench_pair_judge_bradleyterry",
+    "wildbench_pair_judge_new",
+    "writingbench_judge"
+  ],
+  "summedits": [
+    "summedits_gen",
+    "summedits_gen_315438",
+    "summedits_gen_4fb38b",
+    "summedits_ppl",
+    "summedits_ppl_1fbeb6",
+    "summedits_ppl_3c30d0",
+    "summedits_ppl_fa58ba"
+  ],
+  "summscreen": [
+    "summscreen_gen",
+    "summscreen_gen_653185",
+    "summscreen_gen_aa5eb3"
+  ],
+  "supergpqa": [
+    "supergpqa_cascade_gen_1545c1",
+    "supergpqa_cascade_rawprompt_gen_ca8345",
+    "supergpqa_gen",
+    "supergpqa_llmjudge_field_gen_1545c1",
+    "supergpqa_llmjudge_gen_12b8bc"
+  ],
+  "taco": [
+    "taco_gen",
+    "taco_gen_c7893a",
+    "taco_levels_gen_411572"
+  ],
+  "teval": [
+    "teval_en_gen",
+    "teval_en_gen_1ac254",
+    "teval_zh_gen",
+    "teval_zh_gen_1ac254"
+  ],
+  "triviaqa": [
+    "triviaqa_gen",
+    "triviaqa_gen_0356ec",
+    "triviaqa_gen_2121ce",
+    "triviaqa_gen_3e39a5",
+    "triviaqa_gen_429db5",
+    "triviaqa_gen_d297bb",
+    "triviaqa_wiki_1shot_gen_20a989",
+    "triviaqa_wiki_1shot_gen_bc5f21",
+    "triviaqa_wiki_1shot_gen_c87d61",
+    "triviaqa_wiki_1shot_gen_eaf81e",
+    "triviaqa_wiki_gen_d18bf4"
+  ],
+  "triviaqarc": [
+    "triviaqarc_gen",
+    "triviaqarc_gen_a2d88a",
+    "triviaqarc_gen_db6413"
+  ],
+  "truthfulqa": [
+    "truthfulqa_gen",
+    "truthfulqa_gen_1e7d8d",
+    "truthfulqa_gen_5ddc62"
+  ],
+  "tydiqa": [
+    "tydiqa_gen",
+    "tydiqa_gen_978d2a"
+  ],
+  "wikibench": [
+    "wikibench_few_shot_ppl_c23d79",
+    "wikibench_gen",
+    "wikibench_gen_0978ad",
+    "wikibench_gen_f96ece"
+  ],
+  "wikitext": [
+    "wikitext_103_raw_ppl",
+    "wikitext_103_raw_ppl_752e2a",
+    "wikitext_2_raw_ppl",
+    "wikitext_2_raw_ppl_752e2a"
+  ],
+  "winograd": [
+    "winograd_ppl",
+    "winograd_ppl_8f3049",
+    "winograd_ppl_b6c7ed"
+  ],
+  "winogrande": [
+    "deprecated_winogrande_gen_a9ede5",
+    "winogrande_5shot_gen_6447e6",
+    "winogrande_5shot_gen_b36770",
+    "winogrande_5shot_ll_252f01",
+    "winogrande_gen",
+    "winogrande_gen_458220",
+    "winogrande_gen_a027b6",
+    "winogrande_ll",
+    "winogrande_ll_c5cf57",
+    "winogrande_ppl_55a66e",
+    "winogrande_ppl_9307fd"
+  ],
+  "xiezhi": [
+    "xiezhi_gen",
+    "xiezhi_gen_b86cf5",
+    "xiezhi_ppl",
+    "xiezhi_ppl_ea6bd7"
+  ]
+}

@@ -95,7 +95,13 @@ def get_config_from_arg(args) -> Config:
     """
 
     if args.config:
-        config = Config.fromfile(args.config, format_python_code=False)
+        config_basename = os.path.basename(args.config)
+        dynamic_config_files = {'eval_flexible.py', 'eval_keye_flexible.py'}
+        is_dynamic_config = config_basename in dynamic_config_files
+        config = Config.fromfile(
+            args.config,
+            lazy_import=False if is_dynamic_config else None,
+            format_python_code=True)
         config = try_fill_in_custom_cfgs(config)
 
         if 'chatml_datasets' in config.keys():
