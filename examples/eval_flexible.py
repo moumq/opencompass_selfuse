@@ -79,9 +79,21 @@ LEGACY_DATASET_KEYS = ('dataset', 'ref', 'name')
 
 def _get_repo_root() -> str:
     current_file = globals().get('__file__')
-    if not current_file:
-        current_file = os.path.join(os.getcwd(), 'examples', 'eval_flexible.py')
-    return os.path.dirname(os.path.dirname(os.path.abspath(current_file)))
+    if current_file:
+        return os.path.dirname(os.path.dirname(os.path.abspath(current_file)))
+    # Fallback: locate repo root via the opencompass package itself.
+    # This works regardless of cwd when executed via mmengine Config.fromfile().
+    try:
+        import opencompass as _oc
+        pkg_dir = os.path.dirname(os.path.abspath(_oc.__file__))
+        # pkg_dir = <repo_root>/opencompass  →  repo_root = parent
+        candidate = os.path.dirname(pkg_dir)
+        if os.path.isdir(os.path.join(candidate, 'examples')):
+            return candidate
+    except ImportError:
+        pass
+    # Last resort: assume cwd is the repo root
+    return os.getcwd()
 
 
 def _dedup_files(files: list[tuple[str, str]]) -> list[tuple[str, str]]:

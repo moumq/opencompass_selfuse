@@ -14,8 +14,8 @@ from opencompass.registry import PARTITIONERS, RUNNERS, build_from_cfg
 from opencompass.runners import SlurmRunner
 from opencompass.summarizers import DefaultSummarizer
 from opencompass.utils import (HeartBeatManager, LarkReporter, get_logger,
-                               pretty_print_config, read_from_station,
-                               save_to_station)
+                               model_abbr_from_cfg, pretty_print_config,
+                               read_from_station, save_to_station)
 from opencompass.utils.run import (fill_eval_cfg, fill_infer_cfg,
                                    get_config_from_arg)
 
@@ -33,6 +33,62 @@ def _is_eval_daemon(task_type) -> bool:
     if isinstance(task_type, str):
         return task_type.endswith('OpenICLEvalWatchTask')
     return getattr(task_type, '__name__', '') == 'OpenICLEvalWatchTask'
+
+
+def _get_single_model_abbr(cfg):
+    models = cfg.get('models', [])
+    if len(models) != 1:
+        return None
+    return model_abbr_from_cfg(models[0])
+
+
+def _list_timestamp_dirs(work_dir):
+    if not osp.isdir(work_dir):
+        return []
+    return sorted(
+        entry for entry in os.listdir(work_dir)
+        if entry != 'latest' and osp.isdir(osp.join(work_dir, entry)))
+
+
+def _resolve_reuse_root(base_work_dir, model_abbr, reuse, logger):
+    candidate_roots = []
+    if model_abbr:
+        candidate_roots.append(osp.join(base_work_dir, model_abbr))
+    candidate_roots.append(base_work_dir)
+
+    if reuse == 'latest':
+        for root_dir in candidate_roots:
+            latest_path = osp.join(root_dir, 'latest')
+            if osp.islink(latest_path):
+                target_name = osp.basename(os.readlink(latest_path).rstrip('/'))
+                if target_name:
+                    return root_dir, target_name
+            timestamp_dirs = _list_timestamp_dirs(root_dir)
+            if timestamp_dirs:
+                return root_dir, timestamp_dirs[-1]
+        logger.warning('No previous results to reuse!')
+        return candidate_roots[0], None
+
+    for root_dir in candidate_roots:
+        if osp.isdir(osp.join(root_dir, reuse)):
+            return root_dir, reuse
+
+    return candidate_roots[0], reuse
+
+
+def _update_latest_symlink(root_dir, current_workdir, logger):
+    latest_path = osp.join(root_dir, 'latest')
+    target_name = osp.basename(osp.normpath(current_workdir))
+
+    if osp.lexists(latest_path):
+        if osp.islink(latest_path) or osp.isfile(latest_path):
+            os.unlink(latest_path)
+        else:
+            logger.warning('Skip updating latest symlink because %s exists and is not a symlink.', latest_path)
+            return
+
+    os.symlink(target_name, latest_path)
+    logger.info('Updated latest symlink: %s -> %s', latest_path, target_name)
 
 
 def parse_args():
@@ -288,18 +344,19 @@ def main():
     else:
         cfg.setdefault('work_dir', os.path.join('outputs', 'default'))
 
+    base_work_dir = cfg['work_dir']
+    model_abbr = _get_single_model_abbr(cfg)
+    scoped_work_dir = osp.join(base_work_dir, model_abbr) if model_abbr else base_work_dir
+
     # cfg_time_str defaults to the current time
     cfg_time_str = dir_time_str = datetime.now().strftime('%Y%m%d_%H%M%S')
     if args.reuse:
-        if args.reuse == 'latest':
-            if not os.path.exists(cfg.work_dir) or not os.listdir(
-                    cfg.work_dir):
-                logger.warning('No previous results to reuse!')
-            else:
-                dirs = os.listdir(cfg.work_dir)
-                dir_time_str = sorted(dirs)[-1]
-        else:
-            dir_time_str = args.reuse
+        scoped_work_dir, reused_time_str = _resolve_reuse_root(
+            base_work_dir, model_abbr, args.reuse, logger)
+        if reused_time_str is not None:
+            dir_time_str = reused_time_str
+        elif args.mode in ['eval', 'viz'] and not args.read_from_station:
+            raise ValueError('No previous results to reuse under the resolved work_dir.')
         logger.info(f'Reusing experiements from {dir_time_str}')
     elif args.mode in ['eval', 'viz'] and not args.read_from_station:
         raise ValueError(
@@ -308,7 +365,7 @@ def main():
             'or viz mode!')
 
     # update "actual" work_dir
-    cfg['work_dir'] = osp.join(cfg.work_dir, dir_time_str)
+    cfg['work_dir'] = osp.join(scoped_work_dir, dir_time_str)
     current_workdir = cfg['work_dir']
     logger.info(f'Current exp folder: {current_workdir}')
 
@@ -499,6 +556,9 @@ def main():
             summarizer_cfg['config'] = cfg
             summarizer = build_from_cfg(summarizer_cfg)
             summarizer.summarize(time_str=cfg_time_str)
+
+    if model_abbr:
+        _update_latest_symlink(scoped_work_dir, current_workdir, logger)
 
 
 

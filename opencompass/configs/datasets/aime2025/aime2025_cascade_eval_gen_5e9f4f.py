@@ -20,6 +20,7 @@ from opencompass.evaluator import (
     GenericLLMEvaluator,
     MATHVerifyEvaluator
 )
+from opencompass.models import MmuGptJudge
 
 aime2025_reader_cfg = dict(input_columns=['question'], output_column='answer')
 
@@ -93,7 +94,16 @@ cascade_evaluator = dict(
             path='opencompass/aime2025',
             reader_cfg=aime2025_reader_cfg,
         ),
-        judge_cfg=dict(),
+        judge_cfg=dict(
+            type=MmuGptJudge,
+            path='wenbin_93bc5129_gpt-4o-2024-05-13',
+            max_out_len=16384,
+            max_seq_len=49152,
+            query_per_second=16,
+            batch_size=1024,
+            temperature=0.001,
+            verbose=True,
+        ),
         dict_postprocessor=dict(type=generic_llmjudge_postprocess),
     ),
     parallel=False,

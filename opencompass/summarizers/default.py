@@ -8,6 +8,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 import mmengine
+import pandas as pd
 import tabulate
 from mmengine import ConfigDict
 
@@ -330,9 +331,11 @@ class DefaultSummarizer:
             output_path = osp.join(self.work_dir, 'summary', f'summary_{time_str}.txt')
             output_csv_path = osp.join(self.work_dir, 'summary', f'summary_{time_str}.csv')
             output_md_path = osp.join(self.work_dir, 'summary', f'summary_{time_str}.md')
+            output_xlsx_path = osp.join(self.work_dir, 'summary', f'summary_{time_str}.xlsx')
         else:
             output_csv_path = output_path.replace('.txt', '.csv')
             output_md_path = output_path.replace('.txt', '.md')
+            output_xlsx_path = output_path.replace('.txt', '.xlsx')
 
         output_dir = osp.split(output_path)[0]
         mmengine.mkdir_or_exist(output_dir)
@@ -372,6 +375,10 @@ class DefaultSummarizer:
             f.write(md_table)
         print(f'\n\nThe markdown format results is as below:\n\n{md_table}')
         self.logger.info(f'write markdown summary to {osp.abspath(output_md_path)}')
+
+        dataframe = pd.DataFrame(table[1:], columns=table[0])
+        dataframe.to_excel(output_xlsx_path, index=False)
+        self.logger.info(f'write xlsx summary to {osp.abspath(output_xlsx_path)}')
 
     def summarize(
         self,

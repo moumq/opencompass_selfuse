@@ -6,7 +6,8 @@ import os
 import mmengine
 from mmengine.config import Config, ConfigDict
 
-from opencompass.utils import build_dataset_from_cfg, get_infer_output_path
+from opencompass.utils import (build_dataset_from_cfg, get_infer_output_path,
+                               model_abbr_from_cfg)
 
 
 def parse_args():
@@ -84,6 +85,39 @@ def dispatch_tasks(cfg):
             }).run()
 
 
+def _resolve_work_dir(base_work_dir, models, reuse):
+    candidate_roots = []
+    if len(models) == 1:
+        candidate_roots.append(
+            os.path.join(base_work_dir, model_abbr_from_cfg(models[0])))
+    candidate_roots.append(base_work_dir)
+
+    if reuse == 'latest':
+        for root_dir in candidate_roots:
+            latest_path = os.path.join(root_dir, 'latest')
+            if os.path.islink(latest_path):
+                dir_time_str = os.path.basename(
+                    os.readlink(latest_path).rstrip('/'))
+                if dir_time_str:
+                    return os.path.join(root_dir, dir_time_str)
+
+            if not os.path.isdir(root_dir):
+                continue
+            dirs = sorted(
+                d for d in os.listdir(root_dir)
+                if d != 'latest' and os.path.isdir(os.path.join(root_dir, d)))
+            if dirs:
+                return os.path.join(root_dir, dirs[-1])
+        return None
+
+    for root_dir in candidate_roots:
+        resolved_path = os.path.join(root_dir, reuse)
+        if os.path.isdir(resolved_path):
+            return resolved_path
+
+    return os.path.join(candidate_roots[0], reuse)
+
+
 def main():
     args = parse_args()
     cfg = Config.fromfile(args.config)
@@ -94,17 +128,11 @@ def main():
         cfg.setdefault('work_dir', './outputs/default')
 
     if args.reuse:
-        if args.reuse == 'latest':
-            if not os.path.exists(cfg.work_dir) or not os.listdir(
-                    cfg.work_dir):
-                print('No previous results to reuse!')
-                return
-            else:
-                dirs = os.listdir(cfg.work_dir)
-                dir_time_str = sorted(dirs)[-1]
-        else:
-            dir_time_str = args.reuse
-    cfg['work_dir'] = os.path.join(cfg.work_dir, dir_time_str)
+        resolved_work_dir = _resolve_work_dir(cfg.work_dir, cfg['models'], args.reuse)
+        if resolved_work_dir is None:
+            print('No previous results to reuse!')
+            return
+        cfg['work_dir'] = resolved_work_dir
 
     cfg['clean'] = args.clean
     cfg['force'] = args.force

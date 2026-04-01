@@ -43,6 +43,39 @@ FAILED = 0
 SUCCEED = 1
 
 
+def _resolve_work_dir(base_work_dir, models, reuse):
+    candidate_roots = []
+    if len(models) == 1:
+        candidate_roots.append(
+            osp.join(base_work_dir, model_abbr_from_cfg(models[0])))
+    candidate_roots.append(base_work_dir)
+
+    if reuse == 'latest':
+        for root_dir in candidate_roots:
+            latest_path = osp.join(root_dir, 'latest')
+            if osp.islink(latest_path):
+                dir_time_str = osp.basename(
+                    os.readlink(latest_path).rstrip('/'))
+                if dir_time_str:
+                    return osp.join(root_dir, dir_time_str)
+
+            if not osp.isdir(root_dir):
+                continue
+            dirs = sorted(
+                d for d in os.listdir(root_dir)
+                if d != 'latest' and osp.isdir(osp.join(root_dir, d)))
+            if dirs:
+                return osp.join(root_dir, dirs[-1])
+        return None
+
+    for root_dir in candidate_roots:
+        resolved_path = osp.join(root_dir, reuse)
+        if osp.isdir(resolved_path):
+            return resolved_path
+
+    return osp.join(candidate_roots[0], reuse)
+
+
 def gpt_python_postprocess(ori_prompt: str, text: str) -> str:
     """Better answer postprocessor for better instruction-aligned models like
     GPT."""
@@ -133,18 +166,13 @@ def main():
 
     assert args.reuse, 'Please provide the experienment work dir.'
     if args.reuse:
-        if args.reuse == 'latest':
-            if not os.path.exists(cfg.work_dir) or not os.listdir(
-                    cfg.work_dir):
-                logger.warning('No previous results to reuse!')
-            else:
-                dirs = os.listdir(cfg.work_dir)
-                dir_time_str = sorted(dirs)[-1]
-        else:
-            dir_time_str = args.reuse
-        logger.info(f'Reusing experiements from {dir_time_str}')
+        resolved_work_dir = _resolve_work_dir(cfg.work_dir, cfg.models, args.reuse)
+        if resolved_work_dir is None:
+            logger.warning('No previous results to reuse!')
+            return
+        logger.info(f'Reusing experiements from {osp.basename(resolved_work_dir)}')
     # update "actual" work_dir
-    cfg['work_dir'] = osp.join(cfg.work_dir, dir_time_str)
+    cfg['work_dir'] = resolved_work_dir
 
     for model in cfg.models:
         model_abbr = model_abbr_from_cfg(model)

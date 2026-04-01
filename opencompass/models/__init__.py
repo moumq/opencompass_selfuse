@@ -29,6 +29,7 @@ from .lightllm_api import LightllmAPI, LightllmChatAPI  # noqa: F401
 from .llama2 import Llama2, Llama2Chat  # noqa: F401
 from .minimax_api import MiniMax, MiniMaxChatCompletionV2  # noqa: F401
 from .mistral_api import Mistral  # noqa: F401
+from .mmu_gpt_judge import MmuGptJudge  # noqa: F401
 from .mixtral import Mixtral  # noqa: F401
 from .modelscope import ModelScope, ModelScopeCausalLM  # noqa: F401
 from .moonshot_api import MoonShot  # noqa: F401
