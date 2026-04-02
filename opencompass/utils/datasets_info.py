@@ -703,6 +703,10 @@ DATASETS_URL = {
         "http://opencompass.oss-cn-shanghai.aliyuncs.com/datasets/data/mbpp.zip",
         "md5": "777739c90f04bce44096a5bc96c8f9e5",
     },
+    "/ceval/formal_ceval": {
+        "url": "https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zip",
+        "md5": "",
+    },
     "/cmmlu/": {
         "url":
         "http://opencompass.oss-cn-shanghai.aliyuncs.com/datasets/data/cmmlu.zip",

@@ -93,6 +93,7 @@ from .lawbench import *  # noqa: F401, F403
 from .LCBench import *  # noqa: F401, F403
 from .lcsts import *  # noqa: F401, F403
 from .leval import *  # noqa: F401, F403
+from .livebench import *  # noqa: F401, F403
 from .livebench_math import *  # noqa: F401, F403
 from .livebench_reasoning import *  # noqa: F401, F403
 from .livecodebench import *  # noqa: F401, F403

@@ -1,7 +1,7 @@
 from opencompass.openicl.icl_prompt_template import PromptTemplate
 from opencompass.openicl.icl_retriever import ZeroRetriever
 from opencompass.openicl.icl_inferencer import GenInferencer
-from opencompass.openicl.icl_evaluator import LMEvaluator
+from opencompass.evaluator import GenericLLMEvaluator
 from opencompass.datasets import CsimpleqaDataset, csimpleqa_postprocess
 
 subjective_reader_cfg = dict(input_columns=['primary_category', 'question','gold_ans', 'messages', 'system_prompt','prompt_template'], output_column='judge')
@@ -22,7 +22,7 @@ subjective_infer_cfg = dict(
 
 subjective_eval_cfg = dict(
     evaluator=dict(
-        type=LMEvaluator,
+        type=GenericLLMEvaluator,
         prompt_template=dict(
             type=PromptTemplate,
             template=dict(
@@ -35,11 +35,18 @@ subjective_eval_cfg = dict(
                 round=[
                     dict(
                         role='HUMAN',
-                        prompt = '{prompt_template}'
+                        prompt='{prompt_template}'
                     ),
                 ]
             ),
         ),
+        dataset_cfg=dict(
+            type=CsimpleqaDataset,
+            name='chinese_simpleqa',
+            path='opencompass/chinese_simpleqa',
+            reader_cfg=subjective_reader_cfg,
+        ),
+        judge_cfg=dict(),
         dict_postprocessor=dict(type=csimpleqa_postprocess),
     ),
     pred_role='BOT',

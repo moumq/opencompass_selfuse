@@ -1,7 +1,7 @@
 from opencompass.openicl.icl_prompt_template import PromptTemplate
 from opencompass.openicl.icl_retriever import ZeroRetriever
 from opencompass.openicl.icl_inferencer import GenInferencer
-from opencompass.openicl.icl_evaluator import LMEvaluator
+from opencompass.evaluator import GenericLLMEvaluator
 from opencompass.datasets import SimpleQADataset, simpleqa_postprocess
 
 GRADER_TEMPLATE = """
@@ -98,23 +98,29 @@ simpleqa_infer_cfg = dict(
 
 simpleqa_eval_cfg = dict(
     evaluator=dict(
-        type=LMEvaluator,
+        type=GenericLLMEvaluator,
         prompt_template=dict(
             type=PromptTemplate,
             template=dict(
-            begin=[
-                dict(
-                    role='SYSTEM',
-                    fallback_role='HUMAN',
-                    prompt="You are a helpful assistant who evaluates the correctness and quality of models' outputs.")
-            ],
+                begin=[
+                    dict(
+                        role='SYSTEM',
+                        fallback_role='HUMAN',
+                        prompt="You are a helpful assistant who evaluates the correctness and quality of models' outputs.")
+                ],
                 round=[
-                dict(
-                    role='HUMAN',
-                    prompt = GRADER_TEMPLATE
-                ),
-            ]),
+                    dict(
+                        role='HUMAN',
+                        prompt=GRADER_TEMPLATE
+                    ),
+                ]),
         ),
+        dataset_cfg=dict(
+            type=SimpleQADataset,
+            path='opencompass/simpleqa',
+            reader_cfg=simpleqa_reader_cfg,
+        ),
+        judge_cfg=dict(),
         dict_postprocessor=dict(type=simpleqa_postprocess),
     ),
     pred_role='BOT',

@@ -1111,6 +1111,10 @@
     "livecodebench_pro_gen",
     "livecodebench_pro_rawprompt_gen"
   ],
+  "LiveBench": [
+    "livebench_llmjudge_gen",
+    "livebench_llmjudge_gen_7f4de8"
+  ],
   "livemathbench": [
     "livemathbench_gen",
     "livemathbench_gen_6eb711",

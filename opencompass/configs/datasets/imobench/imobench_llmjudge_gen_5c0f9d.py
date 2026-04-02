@@ -8,12 +8,10 @@ from opencompass.datasets import (
     math_postprocess_v2,
 )
 
-ANSWERBENCH_V1_PATH = (
-    'https://raw.githubusercontent.com/google-deepmind/superhuman/main/imobench/answerbench.csv'
-)
 ANSWERBENCH_V2_PATH = (
     'https://raw.githubusercontent.com/google-deepmind/superhuman/main/imobench/answerbench_v2.csv'
 )
+IMOBENCH_NUM_RUNS = 8
 
 imobench_reader_cfg = dict(input_columns=['question'], output_column='answer')
 
@@ -31,29 +29,38 @@ imobench_infer_cfg = dict(
 )
 
 GRADER_TEMPLATE = """
-Please as a grading expert, judge whether the final answers given by the candidates below are consistent with the standard answers, that is, whether the candidates answered correctly.
+# System Role: Deterministic Mathematical Autograder
 
-Here are some evaluation criteria:
-1. Please refer to the given standard answer. You don't need to re-generate the answer to the question because the standard answer has been given.
-2. Because the candidate's answer may be different from the standard answer in form, please judge semantic equivalence.
-3. If the prediction is given with \\boxed{}, ignore \\boxed{} and only judge answer consistency.
+You are a precise, automated grading system. Your sole function is to determine if the final answer provided in the Model Solution is mathematically equivalent to the Golden Answer. You must not grade the reasoning or steps, only the final result.
 
-Grade the predicted answer as one of:
-A: CORRECT
-B: INCORRECT
-Just return "A" or "B", with no extra text.
+# 1. Grading Guidelines (Equivalence Rules)
+Equivalence is mandatory for a correct grade. You must rigorously verify if the answers represent the exact same mathematical value or expression, even if the format differs.
+- Algebraic Equivalence: e.g., n(n+1)/2 is equivalent to n^2/2 + n/2.
+- Numerical Equivalence: e.g., 1/2 is equivalent to 0.5; sqrt(2)/2 is equivalent to 1/sqrt(2).
+- Set/List Equivalence: Unless specified as an ordered tuple/vector, the order of elements does not matter.
+- Partial Credit: No partial credit is allowed. If the answer is incomplete or partially incorrect, it is incorrect.
+- No Answers: If no clear, unambiguous final answer can be extracted, the solution must be graded as incorrect.
 
-<Original Question Begin>:
-{question}
-<Original Question End>
+# 2. Output Protocol (Strict Compliance Required)
+You must execute the task using a two-part structure.
 
-<Gold Target Begin>:
-{answer}
-<Gold Target End>
+Part 1: Analysis
+You MUST perform your analysis within <thinking></thinking> tags and follow these steps:
+1. Golden Answer: State the Golden Answer.
+2. Extracted Model Answer: State the extracted answer. If none found, state "No clear final answer found."
+3. Equivalence Analysis: Compare the two answers using the grading guidelines.
+4. Conclusion: State the final determination ("Correct" or "Incorrect").
 
-<Predicted Answer Begin>:
-{prediction}
-<Predicted End>
+Part 2: Final Grade
+Immediately following the closing </thinking> tag, output ONLY one of:
+- \\boxed{Correct}
+- \\boxed{Incorrect}
+
+Do not add any text outside the <thinking> tags or the final \\boxed{} output.
+
+Problem: {question}
+Model Solution: {prediction}
+Golden Answer: {answer}
 """.strip()
 
 
@@ -68,7 +75,7 @@ def make_imobench_eval_cfg(path: str):
                         dict(
                             role='SYSTEM',
                             fallback_role='HUMAN',
-                            prompt="You are a helpful assistant who evaluates the correctness and quality of models' outputs.",
+                            prompt='You are a precise, automated grading system for mathematical answers.',
                         )
                     ],
                     round=[dict(role='HUMAN', prompt=GRADER_TEMPLATE)],
@@ -80,7 +87,11 @@ def make_imobench_eval_cfg(path: str):
                 reader_cfg=imobench_reader_cfg,
             ),
             judge_cfg=dict(),
-            dict_postprocessor=dict(type=generic_llmjudge_postprocess),
+            dict_postprocessor=dict(
+                type=generic_llmjudge_postprocess,
+                true_tag='Correct',
+                false_tag='Incorrect',
+            ),
         ),
         pred_postprocessor=dict(type=math_postprocess_v2),
         pred_role='BOT',
@@ -89,17 +100,7 @@ def make_imobench_eval_cfg(path: str):
 
 imobench_datasets = [
     dict(
-        abbr='IMO-AnswerBench-v1',
-        type=IMOAnswerBenchDataset,
-        path=ANSWERBENCH_V1_PATH,
-        split='train',
-        reader_cfg=imobench_reader_cfg,
-        infer_cfg=imobench_infer_cfg,
-        eval_cfg=make_imobench_eval_cfg(ANSWERBENCH_V1_PATH),
-        mode='singlescore',
-    ),
-    dict(
-        abbr='IMO-AnswerBench-v2',
+        abbr=f'IMO-AnswerBench-v2-run{idx}',
         type=IMOAnswerBenchDataset,
         path=ANSWERBENCH_V2_PATH,
         split='train',
@@ -107,5 +108,6 @@ imobench_datasets = [
         infer_cfg=imobench_infer_cfg,
         eval_cfg=make_imobench_eval_cfg(ANSWERBENCH_V2_PATH),
         mode='singlescore',
-    ),
+    )
+    for idx in range(IMOBENCH_NUM_RUNS)
 ]

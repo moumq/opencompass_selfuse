@@ -60,13 +60,64 @@ def get_final_results(judged_answers,
     return result
 
 
+def _normalize_judge_tag(text: str) -> str:
+    return re.sub(r'\s+', ' ', str(text or '')).strip()
+
+
 def _generic_llmjudge_postprocess(judgement: str,
                                   true_tag: str = 'A',
                                   false_tag: str = 'B'):
-    match = re.search(rf'({re.escape(true_tag)}|{re.escape(false_tag)})',
-                      judgement)
-    grade_letter = match.group(0) if match else 'unknown'
-    return grade_letter
+    judgement = str(judgement or '').strip()
+    true_tag_norm = _normalize_judge_tag(true_tag)
+    false_tag_norm = _normalize_judge_tag(false_tag)
+
+    boxed_pattern = re.compile(
+        rf'\\boxed\s*\{{\s*({re.escape(true_tag_norm)}|{re.escape(false_tag_norm)})\s*\}}',
+        flags=re.IGNORECASE,
+    )
+    match = boxed_pattern.search(judgement)
+    if match:
+        tag = _normalize_judge_tag(match.group(1))
+        if tag.lower() == true_tag_norm.lower():
+            return true_tag
+        if tag.lower() == false_tag_norm.lower():
+            return false_tag
+
+    normalized = _normalize_judge_tag(judgement)
+    exact_pattern = re.compile(
+        rf'^(?:({re.escape(true_tag_norm)})|({re.escape(false_tag_norm)}))$',
+        flags=re.IGNORECASE,
+    )
+    match = exact_pattern.match(normalized)
+    if match:
+        if match.group(1):
+            return true_tag
+        if match.group(2):
+            return false_tag
+
+    line_pattern = re.compile(
+        rf'(?mi)^\s*({re.escape(true_tag_norm)}|{re.escape(false_tag_norm)})\s*$')
+    match = line_pattern.search(judgement)
+    if match:
+        tag = _normalize_judge_tag(match.group(1))
+        if tag.lower() == true_tag_norm.lower():
+            return true_tag
+        if tag.lower() == false_tag_norm.lower():
+            return false_tag
+
+    token_pattern = re.compile(
+        rf'(?<![A-Za-z])({re.escape(true_tag_norm)}|{re.escape(false_tag_norm)})(?![A-Za-z])',
+        flags=re.IGNORECASE,
+    )
+    match = token_pattern.search(judgement)
+    if match:
+        tag = _normalize_judge_tag(match.group(1))
+        if tag.lower() == true_tag_norm.lower():
+            return true_tag
+        if tag.lower() == false_tag_norm.lower():
+            return false_tag
+
+    return 'unknown'
 
 
 @DICT_POSTPROCESSORS.register_module()

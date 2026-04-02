@@ -159,6 +159,7 @@
   "leval": "leval",
   "livecodebench": "livecodebench_gen",
   "livecodebench_pro": "livecodebench_pro_gen",
+  "LiveBench": "livebench_llmjudge_gen",
   "livemathbench": "livemathbench_gen",
   "livereasonbench": "livereasonbench_gen",
   "livestembench": "livestembench_gen",
