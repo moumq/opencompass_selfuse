@@ -160,6 +160,24 @@ class OpenAI(BaseAPIModel):
         else:
             self.proxy_url = openai_proxy_url
 
+        self._init_api_base_pool(openai_api_base)
+
+    def _init_api_base_pool(self, api_base: Union[str, List[str]]) -> None:
+        if isinstance(api_base, (list, tuple)):
+            self.openai_api_bases = list(api_base)
+        else:
+            self.openai_api_bases = [api_base]
+        if not self.openai_api_bases:
+            raise ValueError('openai_api_base must not be empty.')
+        self._api_base_lock = Lock()
+        self._api_base_ctr = -1
+
+    def _next_api_base(self) -> str:
+        with self._api_base_lock:
+            self._api_base_ctr = (self._api_base_ctr + 1) % len(
+                self.openai_api_bases)
+            return self.openai_api_bases[self._api_base_ctr]
+
     def _next_valid_key(self):
         with self._key_lock:
             if len(self.invalid_keys) == len(self.keys):
@@ -291,12 +309,7 @@ class OpenAI(BaseAPIModel):
                     )
                 if self.extra_body:
                     data.update(self.extra_body)
-                if isinstance(self.url, list):
-                    import random
-
-                    url = self.url[random.randint(0, len(self.url) - 1)]
-                else:
-                    url = self.url
+                url = self._next_api_base()
 
                 if self.proxy_url is None:
                     raw_response = requests.post(url,
@@ -641,15 +654,14 @@ class OpenAISDK(OpenAI):
             verbose=verbose,
             max_workers=max_workers,
         )
-        # support multiple api_base for acceleration
-        if isinstance(openai_api_base, List):
-            self.openai_api_base = random.choice(openai_api_base)
-        else:
-            self.openai_api_base = openai_api_base
-
         self.timeout = timeout
         self.http_client_cfg = http_client_cfg
-        self.openai_client = self._create_fresh_client()
+        self.openai_api_base = self.openai_api_bases[0]
+        self.openai_clients = {
+            api_base: self._create_fresh_client(api_base=api_base)
+            for api_base in self.openai_api_bases
+        }
+        self.openai_client = self.openai_clients[self.openai_api_base]
 
         if self.verbose:
             self.logger.info(f'Used openai_client: {self.openai_client}')
@@ -657,7 +669,11 @@ class OpenAISDK(OpenAI):
         self.think_tag = think_tag
         self.openai_extra_kwargs = openai_extra_kwargs
 
-    def _create_fresh_client(self):
+    def _pick_client(self):
+        api_base = self._next_api_base()
+        return api_base, self.openai_clients[api_base]
+
+    def _create_fresh_client(self, api_base: Optional[str] = None):
         """Create a fresh OpenAI client."""
         import httpx
         from openai import OpenAI
@@ -678,7 +694,7 @@ class OpenAISDK(OpenAI):
                                    timeout=httpx.Timeout(self.timeout),
                                    limits=limits)
 
-        return OpenAI(base_url=self.openai_api_base,
+        return OpenAI(base_url=api_base or self.openai_api_base,
                       api_key=current_key,
                       http_client=http_client)
 
@@ -735,12 +751,13 @@ class OpenAISDK(OpenAI):
             if self.openai_extra_kwargs:
                 query_data.update(self.openai_extra_kwargs)
 
+            selected_api_base, openai_client = self._pick_client()
             self.acquire()
             try:
                 if self.verbose:
                     self.logger.info('Start calling OpenAI API')
 
-                responses = self.openai_client.chat.completions.create(
+                responses = openai_client.chat.completions.create(
                     **query_data, timeout=self.timeout)  # timeout in seconds
                 if self.verbose:
                     self.logger.info(
@@ -816,17 +833,17 @@ class OpenAISDK(OpenAI):
                         and status_code in self.status_code_mappings):
                     error_message = self.status_code_mappings[status_code]
                     self.logger.error(
-                        f'error occurs at {self.openai_api_base}')
+                        f'error occurs at {selected_api_base}')
                     self.logger.info(f'Status Code: {status_code}, \n'
                                      f'Original Error Message: {e}, \n'
                                      f'Return Message: {error_message} ')
                     return error_message
                 else:
                     self.logger.error(
-                        f'error occurs at {self.openai_api_base}')
+                        f'error occurs at {selected_api_base}')
                     self.logger.error(e)
             except Exception as e:
-                self.logger.error(f'error occurs at {self.openai_api_base}')
+                self.logger.error(f'error occurs at {selected_api_base}')
                 self.logger.error(e)
             finally:
                 self.release()
@@ -885,31 +902,35 @@ class OpenAISDKRollout(OpenAI):
         )
         from openai import OpenAI
 
-        # support multiple api_base for acceleration
-        if isinstance(openai_api_base, List):
-            self.openai_api_base = random.choice(openai_api_base)
-        else:
-            self.openai_api_base = openai_api_base
+        if self.proxy_url:
+            http_client_cfg = http_client_cfg.copy()
+            http_client_cfg['proxies'] = {
+                'http://': self.proxy_url,
+                'https://': self.proxy_url,
+            }
 
-        if self.proxy_url or http_client_cfg:
-            if self.proxy_url:
-                http_client_cfg['proxies'] = {
-                    'http://': self.proxy_url,
-                    'https://': self.proxy_url,
-                }
-
-        self.openai_client = OpenAI(
-            base_url=self.openai_api_base,
-            api_key=key,
-            http_client=httpx.Client(
-                **http_client_cfg) if http_client_cfg else None,
-        )
+        self.http_client_cfg = http_client_cfg
+        self.openai_api_base = self.openai_api_bases[0]
+        self.openai_clients = {
+            api_base: OpenAI(
+                base_url=api_base,
+                api_key=key,
+                http_client=httpx.Client(**http_client_cfg)
+                if http_client_cfg else None,
+            )
+            for api_base in self.openai_api_bases
+        }
+        self.openai_client = self.openai_clients[self.openai_api_base]
 
         if self.verbose:
             self.logger.info(f'Used openai_client: {self.openai_client}')
         self.status_code_mappings = status_code_mappings
         self.think_tag = think_tag
         self.openai_extra_kwargs = openai_extra_kwargs
+
+    def _pick_client(self):
+        api_base = self._next_api_base()
+        return api_base, self.openai_clients[api_base]
 
     def _generate(
         self,
@@ -966,12 +987,13 @@ class OpenAISDKRollout(OpenAI):
             if self.openai_extra_kwargs:
                 query_data.update(self.openai_extra_kwargs)
 
+            selected_api_base, openai_client = self._pick_client()
             self.acquire()
             try:
                 if self.verbose:
                     self.logger.info('Start calling OpenAI API')
 
-                responses = self.openai_client.chat.completions.create(
+                responses = openai_client.chat.completions.create(
                     **query_data,
                     timeout=timeout,
                     logprobs=True,
@@ -1078,7 +1100,7 @@ class OpenAISDKRollout(OpenAI):
                         and status_code in self.status_code_mappings):
                     error_message = self.status_code_mappings[status_code]
                     self.logger.error(
-                        f'error occurs at {self.openai_api_base}')
+                        f'error occurs at {selected_api_base}')
                     self.logger.info(f'Status Code: {status_code}, \n'
                                      f'Original Error Message: {e}, \n'
                                      f'Return Message: {error_message} ')
@@ -1089,10 +1111,10 @@ class OpenAISDKRollout(OpenAI):
                     return dict(output=error_message, rollout=rollout_error)
                 else:
                     self.logger.error(
-                        f'error occurs at {self.openai_api_base}')
+                        f'error occurs at {selected_api_base}')
                     self.logger.error(e)
             except Exception as e:
-                self.logger.error(f'error occurs at {self.openai_api_base}')
+                self.logger.error(f'error occurs at {selected_api_base}')
                 self.logger.error(e)
             finally:
                 self.release()
