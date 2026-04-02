@@ -90,6 +90,12 @@
     paper: https://arxiv.org/pdf/2506.11928
     configpath: opencompass/configs/datasets/livecodebench_pro/livecodebench_pro_gen.py
     configpath_llmjudge: ''
+- livebench:
+    name: LiveBench
+    category: Reasoning / Math
+    paper: https://huggingface.co/datasets/livebench/reasoning
+    configpath: ''
+    configpath_llmjudge: opencompass/configs/datasets/livebench/livebench_llmjudge_gen.py
 - livemathbench:
     name: LiveMathBench
     category: Math
@@ -102,6 +108,12 @@
     paper: ''
     configpath: opencompass/configs/datasets/livereasonbench/livereasonbench_gen.py
     configpath_llmjudge: ''
+- imobench:
+    name: IMO-AnswerBench
+    category: Math
+    paper: https://github.com/google-deepmind/superhuman/tree/main/imobench
+    configpath: ''
+    configpath_llmjudge: opencompass/configs/datasets/imobench/imobench_llmjudge_gen.py
 - longbench:
     name: LongBench
     category: Long Context

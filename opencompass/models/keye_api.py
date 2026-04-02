@@ -52,11 +52,20 @@ class KeyeChat(OpenAISDK):
         extra_kwargs = dict(openai_extra_kwargs or {})
         if img_detail is not None:
             extra_kwargs.setdefault('img_detail', img_detail)
+
+        # The OpenAI SDK rejects unknown top-level kwargs such as
+        # `chat_template_kwargs`. Forward service-specific flags via
+        # `extra_body` instead so OpenAI-compatible backends can still
+        # consume them when supported.
+        extra_body = dict(extra_kwargs.get('extra_body', {}) or {})
+        chat_template_kwargs = dict(
+            extra_kwargs.pop('chat_template_kwargs', {}) or {})
         if autothink is not None:
-            chat_template_kwargs = dict(
-                extra_kwargs.get('chat_template_kwargs', {}))
             chat_template_kwargs['enable_thinking'] = bool(autothink)
-            extra_kwargs['chat_template_kwargs'] = chat_template_kwargs
+        if chat_template_kwargs:
+            extra_body['chat_template_kwargs'] = chat_template_kwargs
+        if extra_body:
+            extra_kwargs['extra_body'] = extra_body
 
         super().__init__(
             path=model_path,

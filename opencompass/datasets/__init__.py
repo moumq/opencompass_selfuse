@@ -78,6 +78,7 @@ from .humanevalx import *  # noqa: F401, F403
 from .hungarian_math import *  # noqa: F401, F403
 from .IFBench.ifbench import IFBenchEvaluator  # noqa: F401, F403
 from .IFEval.ifeval import IFEvalDataset, IFEvaluator  # noqa: F401, F403
+from .imobench import *  # noqa: F401, F403
 from .inference_ppl import InferencePPLDataset  # noqa: F401, F403
 from .infinitebench import *  # noqa: F401, F403
 from .internsandbox import *  # noqa: F401, F403
@@ -92,6 +93,8 @@ from .lawbench import *  # noqa: F401, F403
 from .LCBench import *  # noqa: F401, F403
 from .lcsts import *  # noqa: F401, F403
 from .leval import *  # noqa: F401, F403
+from .livebench_math import *  # noqa: F401, F403
+from .livebench_reasoning import *  # noqa: F401, F403
 from .livecodebench import *  # noqa: F401, F403
 from .livecodebench_pro import *  # noqa: F401, F403
 from .livemathbench import *  # noqa: F401, F403

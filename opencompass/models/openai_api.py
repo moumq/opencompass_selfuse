@@ -8,7 +8,6 @@ from threading import Lock
 from typing import Dict, List, Optional, Union
 
 import httpx
-import jieba
 import requests
 from tqdm import tqdm
 
@@ -467,6 +466,7 @@ class OpenAI(BaseAPIModel):
             return prompt
         pattern = re.compile(r'[\u4e00-\u9fa5]')
         if pattern.search(prompt):
+            import jieba
             words = list(jieba.cut(prompt, cut_all=False))
             sep = ''
         else:

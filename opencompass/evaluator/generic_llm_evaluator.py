@@ -194,17 +194,18 @@ class GenericLLMEvaluator(BaseEvaluator):
 
     @property
     def default_judge_cfg(self):
-        from opencompass.models import OpenAISDK
-        logger.info('Please set your judge model in `OC_JUDGE_MODEL`, \
-            `OC_JUDGE_API_KEY`, `OC_JUDGE_API_BASE` environment variables.')
+        from opencompass.models import MmuGptJudge
+        logger.info(
+            'Using MMU judge for llmjudge by default. '
+            'Override `OC_JUDGE_MODEL` to choose version alias, '
+            'default=`gpt-4.1`. '
+            'Optional custom mapping can be provided via '
+            '`OC_JUDGE_MMU_MODEL2KEY`.')
         DEFAULT_JUDGE_CFG = dict(
-            type=OpenAISDK,
-            path=os.environ['OC_JUDGE_MODEL'],
-            key=os.environ['OC_JUDGE_API_KEY'],
-            openai_api_base=[
-                os.environ.get('OC_JUDGE_API_BASE',
-                               'https://api.openai.com/v1/')
-            ],
+            type=MmuGptJudge,
+            version=os.environ.get('OC_JUDGE_MODEL', 'gpt-4.1'),
+            internal_path=os.environ.get('MMU_GPT_INTERNAL_PATH',
+                                         '/hetu_group/chenjiankang/research'),
             meta_template=dict(round=[
                 dict(role='HUMAN', api_role='HUMAN'),
                 dict(role='BOT', api_role='BOT', generate=True),
@@ -212,7 +213,6 @@ class GenericLLMEvaluator(BaseEvaluator):
             query_per_second=16,
             batch_size=1024,
             temperature=0.001,
-            tokenizer_path='gpt-4o-2024-05-13',
             verbose=True,
             max_out_len=16384,
             max_seq_len=49152,
