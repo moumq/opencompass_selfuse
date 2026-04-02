@@ -1,5 +1,6 @@
 import ast
 import re
+import unicodedata
 import warnings
 from multiprocessing import Process, Queue
 
@@ -413,6 +414,26 @@ def _remove_nonnumeric_chars_at_ends(s: str):
     return s[start_index:end_index], len(s) - (end_index - start_index)
 
 
+def _normalize_numeric_token(token: str) -> str:
+    normalized = []
+    for char in token.strip():
+        if char in '+-':
+            normalized.append(char)
+            continue
+        try:
+            normalized.append(str(unicodedata.digit(char)))
+        except (TypeError, ValueError):
+            normalized.append(char)
+    return ''.join(normalized)
+
+
+def _parse_int_token(token: str) -> int:
+    normalized = _normalize_numeric_token(token).strip()
+    if normalized in {'', '+', '-'}:
+        raise ValueError('empty numeric token')
+    return int(normalized)
+
+
 def _extract_expression_completions_from_generation(generation: str, debug: bool = False):
     numbers = None
     if 'answer:' in generation.lower():
@@ -431,7 +452,7 @@ def _extract_expression_completions_from_generation(generation: str, debug: bool
             for n in answer_str.split(','):
                 n = n.strip().split(' ')[-1].replace('$', '').replace('{', '').replace('}', '').replace('\\', '').replace('boxed', '').replace('<', '').replace('>', '')
                 try:
-                    numbers.append(int(n))
+                    numbers.append(_parse_int_token(n))
                 except Exception:
                     numbers.append('NO ANSWER')
             if len(numbers) == 0 or set(numbers) == {'NO ANSWER'}:
@@ -443,7 +464,7 @@ def _extract_expression_completions_from_generation(generation: str, debug: bool
         numbers = []
         for n in string.strip().split(','):
             try:
-                numbers.append(int(n.strip()))
+                numbers.append(_parse_int_token(n))
             except Exception:
                 numbers.append('NO ANSWER')
         if len(numbers) == 0 or set(numbers) == {'NO ANSWER'}:
@@ -456,7 +477,7 @@ def _extract_expression_completions_from_generation(generation: str, debug: bool
             if len(n.strip()) == 0:
                 continue
             try:
-                numbers.append(int(n.strip()))
+                numbers.append(_parse_int_token(n))
             except Exception:
                 numbers.append('NO ANSWER')
         if len(numbers) == 0 or set(numbers) == {'NO ANSWER'}:
@@ -466,8 +487,8 @@ def _extract_expression_completions_from_generation(generation: str, debug: bool
         new_numbers = []
         for i, n in enumerate(numbers):
             n, num_removed = _remove_nonnumeric_chars_at_ends(n)
-            if n != '' and n != '₂':
-                new_numbers.append(int(n))
+            if n != '':
+                new_numbers.append(_parse_int_token(n))
             if i > 0 and num_removed > 0:
                 break
         numbers = new_numbers

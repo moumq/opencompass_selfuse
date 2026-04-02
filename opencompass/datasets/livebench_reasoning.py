@@ -1,6 +1,7 @@
 from datasets import Dataset, DatasetDict, load_dataset
 
 from opencompass.registry import LOAD_DATASET
+from opencompass.utils import get_logger
 
 from .base import BaseDataset
 
@@ -32,9 +33,18 @@ class LiveBenchReasoningDataset(BaseDataset):
              release_version: str = DEFAULT_LIVEBENCH_RELEASE_OPTION,
              **kwargs):
         hf_dataset = load_dataset(path, split=split)
+        logger = get_logger()
 
         rows = []
+        available_releases = set()
         for row in hf_dataset:
+            for field in [
+                    'livebench_release_date', 'release_date', 'release',
+                    'version'
+            ]:
+                value = str(row.get(field, '')).strip()
+                if value:
+                    available_releases.add(value)
             if not _match_release(row, release_version):
                 continue
             turns = row.get('turns', [])
@@ -48,6 +58,24 @@ class LiveBenchReasoningDataset(BaseDataset):
                         row.get('release_date', release_version)))
             sample['livebench_release_option'] = release_version
             rows.append(sample)
+
+        if not rows:
+            logger.warning(
+                'No LiveBench reasoning rows matched release %s. Falling back '
+                'to all rows. Available releases: %s', release_version,
+                sorted(available_releases))
+            for row in hf_dataset:
+                turns = row.get('turns', [])
+                question = turns[0] if isinstance(turns, list) and len(turns) > 0 else ''
+                sample = dict(row)
+                sample['question'] = str(question)
+                sample['answer'] = str(row.get('ground_truth', ''))
+                sample['question_id'] = str(row.get('question_id', ''))
+                sample['livebench_release_date'] = str(
+                    row.get('livebench_release_date',
+                            row.get('release_date', release_version)))
+                sample['livebench_release_option'] = release_version
+                rows.append(sample)
 
         dataset = Dataset.from_list(rows)
         return DatasetDict(train=dataset, test=dataset)

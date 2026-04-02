@@ -31,6 +31,23 @@ from absl import logging
 
 import opencompass.datasets.IFEval.instructions_util as instructions_util
 
+
+def _language_matches(value, language):
+    if langdetect is None:
+        logging.warning('langdetect is unavailable, skipping language check for text %s',
+                        value)
+        return True
+
+    try:
+        return langdetect.detect(value) == language
+    except Exception as e:
+        langdetect_exception = getattr(langdetect, 'LangDetectException', None)
+        if langdetect_exception is None or isinstance(e, langdetect_exception):
+            logging.error('Unable to detect language for text %s due to %s',
+                          value, e)  # refex: disable=pytotw.037
+            return True
+        raise
+
 _InstructionArgsDtype = Optional[Dict[str, Union[int, str, Sequence[str]]]]
 
 _LANGUAGES = instructions_util.LANGUAGE_CODES
@@ -161,13 +178,7 @@ class ResponseLanguageChecker(Instruction):
         """
         assert isinstance(value, str)
 
-        try:
-            return langdetect.detect(value) == self._language
-        except langdetect.LangDetectException as e:
-            # Count as instruction is followed.
-            logging.error('Unable to detect language for text %s due to %s',
-                          value, e)  # refex: disable=pytotw.037
-            return True
+        return _language_matches(value, self._language)
 
 
 class NumberOfSentences(Instruction):
@@ -1422,13 +1433,7 @@ class CapitalLettersEnglishChecker(Instruction):
         letters."""
         assert isinstance(value, str)
 
-        try:
-            return value.isupper() and langdetect.detect(value) == 'en'
-        except langdetect.LangDetectException as e:
-            # Count as instruction is followed.
-            logging.error('Unable to detect language for text %s due to %s',
-                          value, e)  # refex: disable=pytotw.037
-            return True
+        return value.isupper() and _language_matches(value, 'en')
 
 
 class LowercaseLettersEnglishChecker(Instruction):
@@ -1454,13 +1459,7 @@ class LowercaseLettersEnglishChecker(Instruction):
         letters."""
         assert isinstance(value, str)
 
-        try:
-            return value.islower() and langdetect.detect(value) == 'en'
-        except langdetect.LangDetectException as e:
-            # Count as instruction is followed.
-            logging.error('Unable to detect language for text %s due to %s',
-                          value, e)  # refex: disable=pytotw.037
-            return True
+        return value.islower() and _language_matches(value, 'en')
 
 
 class CommaChecker(Instruction):
@@ -1536,7 +1535,7 @@ class CapitalWordFrequencyChecker(Instruction):
     def check_following(self, value):
         """Checks the frequency of words with all capital letters."""
         # Hyphenated words will count as one word
-        words = instructions_util.nltk.word_tokenize(value)
+        words = instructions_util.tokenize_words(value)
         capital_words = [word for word in words if word.isupper()]
 
         capital_words = len(capital_words)

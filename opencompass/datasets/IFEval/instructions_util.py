@@ -128,6 +128,15 @@ def count_words(text):
     return num_words
 
 
+def tokenize_words(text):
+    """Tokenizes words with a fallback when punkt resources are unavailable."""
+    try:
+        return nltk.word_tokenize(text)
+    except LookupError:
+        tokenizer = nltk.tokenize.RegexpTokenizer(r"[A-Za-z0-9_]+(?:[-'][A-Za-z0-9_]+)*")
+        return tokenizer.tokenize(text)
+
+
 @functools.lru_cache(maxsize=None)
 def _get_sentence_tokenizer():
     return nltk.data.load('nltk:tokenizers/punkt/english.pickle')
