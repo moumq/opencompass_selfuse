@@ -1,13 +1,31 @@
-from datasets import DatasetDict, load_dataset
+import os
+
+from datasets import Dataset, DatasetDict, load_dataset
 
 from opencompass.registry import LOAD_DATASET
+from opencompass.utils.logging import get_logger
 
 from .base import BaseDataset
+
+_LOCAL_CACHE_SUBDIR = 'data/hle_verified'
+_LOCAL_FILENAME = 'hle_verified.jsonl'
+
+
+def _get_local_cache_path() -> str | None:
+    """Return the local JSONL cache path if COMPASS_DATA_CACHE is set."""
+    cache_dir = os.environ.get('COMPASS_DATA_CACHE', '')
+    if not cache_dir:
+        return None
+    return os.path.join(cache_dir, _LOCAL_CACHE_SUBDIR, _LOCAL_FILENAME)
 
 
 @LOAD_DATASET.register_module()
 class HLEVerifiedDataset(BaseDataset):
     """Loads the HLE-Verified dataset (skylenage/HLE-Verified).
+
+    Data loading priority:
+      1. Local JSONL cache at ``$COMPASS_DATA_CACHE/data/hle_verified/``
+      2. HuggingFace Hub (downloads & caches locally for next time)
 
     By default uses Gold + Revision subsets (verified correct questions).
     Set ``subset`` to control which verified classes to include:
@@ -21,10 +39,27 @@ class HLEVerifiedDataset(BaseDataset):
     def load(path: str = 'skylenage/HLE-Verified',
              subset: str = 'gold+revision',
              category: str | None = None):
-        dataset = load_dataset(path)
-        # The dataset has a single 'train' split containing all subsets
-        split_key = list(dataset.keys())[0]
-        ds = dataset[split_key]
+        logger = get_logger()
+        local_path = _get_local_cache_path()
+
+        # --- Try local cache first ---
+        if local_path and os.path.isfile(local_path):
+            logger.info(f'Loading HLE-Verified from local cache: {local_path}')
+            ds = Dataset.from_json(local_path)
+        else:
+            # --- Download from HuggingFace Hub ---
+            logger.info(
+                f'Local cache not found, downloading HLE-Verified '
+                f'from HuggingFace Hub: {path}')
+            dataset = load_dataset(path)
+            split_key = list(dataset.keys())[0]
+            ds = dataset[split_key]
+
+            # Save to local cache for future runs
+            if local_path:
+                os.makedirs(os.path.dirname(local_path), exist_ok=True)
+                ds.to_json(local_path)
+                logger.info(f'Saved HLE-Verified cache to: {local_path}')
 
         # Filter by Verified_Classes
         subset_lower = subset.lower()
