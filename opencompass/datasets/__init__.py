@@ -70,6 +70,7 @@ from .gsm_hard import *  # noqa: F401, F403
 from .healthbench.healthbench import *  # noqa: F401, F403
 from .hellaswag import *  # noqa: F401, F403
 from .hle import *  # noqa: F401, F403
+from .hle_verified import *  # noqa: F401, F403
 from .huggingface import *  # noqa: F401, F403
 from .humaneval import *  # noqa: F401, F403
 from .humaneval_multi import *  # noqa: F401, F403
@@ -165,6 +166,7 @@ from .SciKnowEval import *  # noqa: F401, F403
 from .SciReasoner import *  # noqa: F401, F403
 from .SeedBench import *  # noqa: F401, F403
 from .simpleqa import *  # noqa: F401, F403
+from .simpleqa_verified import *  # noqa: F401, F403
 from .siqa import *  # noqa: F401, F403
 from .smolinstruct import *  # noqa: F401, F403
 from .squad20 import SQuAD20Dataset, SQuAD20Evaluator  # noqa: F401, F403

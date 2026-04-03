@@ -22,19 +22,39 @@ class CEvalDataset(BaseDataset):
             from modelscope import MsDataset
             dataset = MsDataset.load(dataset_name=path, subset_name=name)
         else:
+            # Try loading from local CSV files first
+            local_ok = True
             for split in ['dev', 'val', 'test']:
                 filename = osp.join(path, split, f'{name}_{split}.csv')
-                with open(filename, encoding='utf-8') as f:
-                    reader = csv.reader(f)
-                    header = next(reader)
-                    for row in reader:
-                        item = dict(zip(header, row))
-                        item.setdefault('explanation', '')
-                        item.setdefault('answer', '')
-                        dataset.setdefault(split, []).append(item)
-            dataset = DatasetDict(
-                {i: Dataset.from_list(dataset[i])
-                 for i in dataset})
+                if not osp.exists(filename):
+                    local_ok = False
+                    break
+            if local_ok:
+                for split in ['dev', 'val', 'test']:
+                    filename = osp.join(path, split, f'{name}_{split}.csv')
+                    with open(filename, encoding='utf-8') as f:
+                        reader = csv.reader(f)
+                        header = next(reader)
+                        for row in reader:
+                            item = dict(zip(header, row))
+                            item.setdefault('explanation', '')
+                            item.setdefault('answer', '')
+                            dataset.setdefault(split, []).append(item)
+                dataset = DatasetDict(
+                    {i: Dataset.from_list(dataset[i])
+                     for i in dataset})
+            else:
+                # Fallback: load from HuggingFace datasets library,
+                # then save as local CSV so subsequent runs skip the download.
+                import os
+                from datasets import load_dataset
+                dataset = load_dataset('ceval/ceval-exam', name)
+                for split in dataset:
+                    split_dir = osp.join(path, split)
+                    os.makedirs(split_dir, exist_ok=True)
+                    csv_path = osp.join(split_dir, f'{name}_{split}.csv')
+                    if not osp.exists(csv_path):
+                        dataset[split].to_csv(csv_path, index=False)
         return dataset
 
 
