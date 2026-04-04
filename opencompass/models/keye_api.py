@@ -26,6 +26,14 @@ class KeyeChat(OpenAISDK):
     - ``img_detail`` passthrough via ``openai_extra_kwargs``
     """
 
+    # Parameters that OpenAI chat.completions.create() accepts at the
+    # top level but OpenAISDK.__init__() does not have as explicit args.
+    # These are collected and forwarded via ``openai_extra_kwargs``.
+    _OPENAI_API_PASSTHROUGH = frozenset({
+        'presence_penalty', 'frequency_penalty', 'top_p',
+        'logit_bias', 'stop', 'seed', 'user', 'n',
+    })
+
     def __init__(
         self,
         path: str = '',
@@ -53,11 +61,25 @@ class KeyeChat(OpenAISDK):
         if img_detail is not None:
             extra_kwargs.setdefault('img_detail', img_detail)
 
+        # Collect OpenAI API parameters that are not explicit OpenAISDK
+        # __init__ args (e.g. presence_penalty, top_p) from **kwargs and
+        # forward them via openai_extra_kwargs so they reach
+        # chat.completions.create().
+        remaining_kwargs = {}
+        for k, v in kwargs.items():
+            if k in self._OPENAI_API_PASSTHROUGH:
+                extra_kwargs[k] = v
+            else:
+                remaining_kwargs[k] = v
+
         # The OpenAI SDK rejects unknown top-level kwargs such as
         # `chat_template_kwargs`. Forward service-specific flags via
         # `extra_body` instead so OpenAI-compatible backends can still
         # consume them when supported.
         extra_body = dict(extra_kwargs.get('extra_body', {}) or {})
+        # Also accept extra_body directly from config kwargs
+        if 'extra_body' in remaining_kwargs:
+            extra_body.update(remaining_kwargs.pop('extra_body') or {})
         chat_template_kwargs = dict(
             extra_kwargs.pop('chat_template_kwargs', {}) or {})
         if autothink is not None:
@@ -78,7 +100,7 @@ class KeyeChat(OpenAISDK):
             temperature=temperature,
             openai_extra_kwargs=extra_kwargs,
             timeout=timeout,
-            **kwargs,
+            **remaining_kwargs,
         )
 
         self.max_tokens = max_tokens

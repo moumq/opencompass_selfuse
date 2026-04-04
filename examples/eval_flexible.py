@@ -645,6 +645,57 @@ work_dir = FLEX_JOB.get(
     'work_dir',
     os.environ.get('FLEX_EVAL_WORK_DIR', './outputs/flexible_eval'))
 
+# ---------------------------------------------------------------------------
+# Auto-build summarizer with summary_groups for known benchmarks
+# ---------------------------------------------------------------------------
+def _build_summarizer_cfg(loaded_datasets: list[dict]) -> dict:
+    """Detect loaded datasets and attach appropriate summary_groups."""
+    from mmengine.config import Config as _Cfg
+
+    _repo_root = _get_repo_root()
+    _groups_dir = os.path.join(
+        _repo_root, 'opencompass', 'configs', 'summarizers', 'groups')
+
+    # Map of prefix -> summary group config file (relative to groups_dir)
+    _KNOWN_GROUPS = {
+        'ceval': 'ceval.py',
+        'mmlu_pro': 'mmlu_pro.py',
+        'mmlu': 'mmlu.py',
+        'gpqa': 'gpqa.py',
+    }
+
+    dataset_abbrs = set()
+    for ds in loaded_datasets:
+        abbr = ds.get('abbr', '')
+        if abbr:
+            dataset_abbrs.add(abbr)
+
+    summary_groups = []
+    loaded_group_files = set()
+    for prefix, group_file in _KNOWN_GROUPS.items():
+        # Check if any loaded dataset matches this prefix
+        has_match = any(
+            abbr == prefix or abbr.startswith(prefix + '_') or abbr.startswith(prefix + '-')
+            for abbr in dataset_abbrs
+        )
+        if not has_match:
+            continue
+        group_path = os.path.join(_groups_dir, group_file)
+        if not os.path.isfile(group_path) or group_path in loaded_group_files:
+            continue
+        loaded_group_files.add(group_path)
+        try:
+            cfg = _Cfg.fromfile(group_path)
+            for key in cfg.keys():
+                if key.endswith('_summary_groups'):
+                    summary_groups.extend(cfg[key])
+        except Exception:
+            pass
+
+    return dict(summary_groups=summary_groups) if summary_groups else {}
+
+summarizer = _build_summarizer_cfg(datasets)
+
 if os.environ.get('FLEX_EVAL_KEEP_INTERNALS') != '1':
     for _internal_name in [
             'FLEX_JOB',
@@ -672,6 +723,7 @@ if os.environ.get('FLEX_EVAL_KEEP_INTERNALS') != '1':
             '_resolve_default_dataset_ref',
             '_load_datasets',
             '_build_runtime_cfg',
+            '_build_summarizer_cfg',
             'json',
             'os',
             're',

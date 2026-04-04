@@ -907,6 +907,12 @@
     "hellaswag_ppl_9dbb12",
     "hellaswag_ppl_a6e128"
   ],
+  "hmmt_feb": [
+    "hmmt_feb_cascade_eval_gen"
+  ],
+  "hmmt_nov": [
+    "hmmt_nov_cascade_eval_gen"
+  ],
   "hmmt2026": [
     "hmmt2026_cascade_eval_gen_6ff468",
     "hmmt2026_cascade_eval_rawprompt_gen_0970dd"

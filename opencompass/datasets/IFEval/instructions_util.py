@@ -139,14 +139,38 @@ def tokenize_words(text):
 
 @functools.lru_cache(maxsize=None)
 def _get_sentence_tokenizer():
-    return nltk.data.load('nltk:tokenizers/punkt/english.pickle')
+    """Get sentence tokenizer with fallback for different NLTK versions."""
+    # NLTK 3.8+: use PunktTokenizer class with punkt_tab data
+    try:
+        from nltk.tokenize import PunktTokenizer
+        try:
+            return PunktTokenizer('english')
+        except LookupError:
+            nltk.download('punkt_tab', quiet=True)
+            return PunktTokenizer('english')
+    except ImportError:
+        pass
+    # Legacy NLTK: load punkt pickle
+    try:
+        return nltk.data.load('nltk:tokenizers/punkt/english.pickle')
+    except LookupError:
+        nltk.download('punkt', quiet=True)
+        try:
+            return nltk.data.load('nltk:tokenizers/punkt/english.pickle')
+        except Exception:
+            return None
 
 
 def count_sentences(text):
     """Count the number of sentences."""
     tokenizer = _get_sentence_tokenizer()
-    tokenized_sentences = tokenizer.tokenize(text)
-    return len(tokenized_sentences)
+    if tokenizer is not None:
+        tokenized_sentences = tokenizer.tokenize(text)
+        return len(tokenized_sentences)
+    # Fallback: split by common sentence-ending punctuation
+    import re
+    sentences = re.split(r'(?<=[.!?])\s+', text.strip())
+    return len([s for s in sentences if s])
 
 
 def generate_keywords(num_keywords):

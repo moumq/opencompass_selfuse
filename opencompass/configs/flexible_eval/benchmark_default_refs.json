@@ -136,6 +136,8 @@
   "gsm8k_contamination": "gsm8k_contamination_ppl_ecdd22",
   "gsm_hard": "gsmhard_gen",
   "hellaswag": "hellaswag_gen",
+  "hmmt_feb": "hmmt_feb_cascade_eval_gen",
+  "hmmt_nov": "hmmt_nov_cascade_eval_gen",
   "hmmt2026": "hmmt2026_cascade_eval_gen_6ff468",
   "humaneval": "humaneval_gen",
   "humaneval_cn": "humaneval_cn_gen",
