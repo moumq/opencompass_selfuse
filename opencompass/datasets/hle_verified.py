@@ -43,7 +43,7 @@ class HLEVerifiedDataset(BaseDataset):
         local_path = _get_local_cache_path()
 
         # --- Try local cache first ---
-        if local_path and os.path.isfile(local_path):
+        if local_path and os.path.isfile(local_path) and os.path.getsize(local_path) > 0:
             logger.info(f'Loading HLE-Verified from local cache: {local_path}')
             ds = Dataset.from_json(local_path)
         else:

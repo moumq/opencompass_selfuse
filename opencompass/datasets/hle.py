@@ -28,7 +28,7 @@ class HLEDataset(BaseDataset):
         local_path = _get_local_cache_path()
 
         # --- Try local cache first ---
-        if local_path and os.path.isfile(local_path):
+        if local_path and os.path.isfile(local_path) and os.path.getsize(local_path) > 0:
             logger.info(f'Loading HLE from local cache: {local_path}')
             ds = Dataset.from_json(local_path)
         else:
@@ -39,13 +39,31 @@ class HLEDataset(BaseDataset):
             dataset = load_dataset(path)
             ds = dataset['test']
 
+            # Filter out image-based questions BEFORE caching
+            # (image column contains PIL objects that can't be serialized)
+            ds = ds.filter(lambda x: x['image'] == '')
+            # Drop the image column to avoid serialization issues
+            if 'image' in ds.column_names:
+                ds = ds.remove_columns(['image'])
+
             # Save to local cache for future runs
-            if local_path:
+            if local_path and len(ds) > 0:
                 os.makedirs(os.path.dirname(local_path), exist_ok=True)
-                ds.to_json(local_path)
+                try:
+                    ds.to_json(local_path, force_ascii=True)
+                except Exception:
+                    import json
+                    with open(local_path, 'w', encoding='utf-8') as f:
+                        for row in ds:
+                            f.write(json.dumps(
+                                {k: str(v) if not isinstance(v, (str, int, float, bool, list, dict, type(None))) else v
+                                 for k, v in row.items()},
+                                ensure_ascii=False) + '\n')
                 logger.info(f'Saved HLE cache to: {local_path}')
 
-        ds = ds.filter(lambda x: x['image'] == '')
+        # Filter text-only (for cached data that may still have image column)
+        if 'image' in ds.column_names:
+            ds = ds.filter(lambda x: x['image'] == '')
         if category:
             ds = ds.filter(lambda x: x['category'] == category)
         ds = ds.rename_column('question', 'problem')

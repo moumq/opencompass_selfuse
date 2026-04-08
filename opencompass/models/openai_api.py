@@ -538,10 +538,11 @@ class OpenAI(BaseAPIModel):
                                        item else item['content'])
                     for item in input)
             if input_len > max_seq_len:
-                raise ValueError(
+                self.logger.warning(
                     f'Input length ({input_len}) exceeds max_seq_len '
-                    f'({max_seq_len}) and mode is set to "none". Please '
-                    f'either change the mode or increase the max_seq_len.')
+                    f'({max_seq_len}). Auto-falling back to mid truncation '
+                    f'to avoid aborting the entire evaluation.')
+                mode = 'mid'
 
         # Trim input if needed
         def bin_trim_wrapper(text):

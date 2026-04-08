@@ -160,9 +160,30 @@ def first_capital_postprocess_multi(text: str) -> str:
 
 
 def last_option_postprocess(text: str, options: str) -> str:
-    match = re.findall(rf'([{options}])', text)
-    if match:
-        return match[-1]
+    """Extract the last mentioned option from text.
+
+    Prioritizes structured answer patterns (e.g. "The correct answer is (B)")
+    over bare letter matches to avoid false positives from reasoning text.
+    """
+    # Priority 1: find last explicit answer pattern
+    answer_patterns = [
+        rf'[Tt]he correct answer is:?\s*\(?([{options}])\)?',
+        rf'[Tt]he answer is:?\s*\(?([{options}])\)?',
+        rf'(?i)ANSWER\s*:\s*([{options}])',
+        rf'答案[是为]\s*([{options}])',
+    ]
+    for pattern in answer_patterns:
+        matches = re.findall(pattern, text)
+        if matches:
+            return matches[-1]
+    # Priority 2: find last parenthesized option like (A), (B)
+    paren_matches = re.findall(rf'\(([{options}])\)', text)
+    if paren_matches:
+        return paren_matches[-1]
+    # Priority 3: bare letter match (last occurrence)
+    bare_matches = re.findall(rf'(?<![a-zA-Z])([{options}])(?![a-zA-Z])', text)
+    if bare_matches:
+        return bare_matches[-1]
     return ''
 
 
