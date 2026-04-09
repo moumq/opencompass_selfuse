@@ -464,6 +464,14 @@ def _load_models(model_entries: list[dict]) -> list[dict]:
                     inline_cfg['ckpt'] = inline_cfg['abbr']
                 else:
                     inline_cfg['path'] = inline_cfg['abbr']
+
+            # Auto-add <think> tag stripping for thinking models so that
+            # evaluators (especially GPT judges) only see the final answer.
+            if 'pred_postprocessor' not in inline_cfg:
+                inline_cfg['pred_postprocessor'] = dict(
+                    type='opencompass.utils.text_postprocessors.strip_think_tags'
+                )
+
             models.append(inline_cfg)
 
     if not models:

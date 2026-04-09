@@ -170,20 +170,25 @@ class OpenICLEvalTask(BaseTask):
             preds = mmengine.load(filename)
             preds = [preds[str(i)] for i in range(len(preds))]
         else:
-            filename = partial_filename
+            # Collect all shard files first, then load them.
+            shard_files = []
+            shard_path = partial_filename
+            idx = 1
+            while osp.exists(osp.realpath(shard_path)):
+                shard_files.append(shard_path)
+                shard_path = root + f'_{idx}' + ext
+                idx += 1
+
             preds = []
-            i = 1
-            while osp.exists(osp.realpath(filename)):
+            for sf in shard_files:
                 try:
-                    sub_preds = mmengine.load(filename)
+                    sub_preds = mmengine.load(sf)
                     preds.extend(
-                        [sub_preds[str(i)] for i in range(len(sub_preds))])
-                    filename = root + f'_{i}' + ext
-                    i += 1
+                        [sub_preds[str(j)] for j in range(len(sub_preds))])
                 except Exception as e:
                     self.logger.error(
-                        f'Error loading prediction file {filename}: {e}')
-                    break
+                        f'Error loading prediction file {sf}: {e}')
+                    raise
 
         pred_dicts = copy.deepcopy(preds)
         preds = {k: [pred.get(k) for pred in preds] for k in preds[0]}

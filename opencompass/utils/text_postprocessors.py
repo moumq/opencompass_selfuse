@@ -70,6 +70,13 @@ def think_pred_postprocess(
         return prediction
 
 
+@TEXT_POSTPROCESSORS.register_module('strip_think_tags')
+def strip_think_tags(prediction: str) -> str:
+    """Remove <think>...</think> blocks from model output."""
+    return re.sub(r'<think>.*?</think>', '', prediction,
+                  flags=re.DOTALL).strip()
+
+
 def first_option_postprocess(text: str, options: str, cushion=True) -> str:
     """Find first valid option for text."""
 

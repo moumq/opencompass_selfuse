@@ -110,10 +110,24 @@ class OpenICLEvalWatchTask(OpenICLEvalTask):
         model_abbr = model_abbr_from_cfg(model_cfg)
         dataset_abbr = dataset_abbr_from_cfg(dataset_cfg)
         status = status_index[(model_abbr, dataset_abbr)].get_task_status()
-        if status and all(item['status'] == 'done'
-                          for item in status.values()):
+        if not status or not all(item['status'] == 'done'
+                                 for item in status.values()):
+            return False
+
+        # Guard against race condition: verify prediction files actually exist
+        # on disk before declaring ready.  Status files may report "done" for
+        # a subset of shards while other shards have not started yet.
+        out_path = get_infer_output_path(
+            model_cfg, dataset_cfg, osp.join(self.work_dir, 'predictions'))
+        if osp.exists(out_path):
             return True
-        return False
+        root, ext = osp.splitext(out_path)
+        # All shard files referenced by status must exist as predictions.
+        for stem in status:
+            shard_path = osp.join(osp.dirname(out_path), f'{stem}{ext}')
+            if not osp.exists(shard_path):
+                return False
+        return True
 
 
 def parse_args():
